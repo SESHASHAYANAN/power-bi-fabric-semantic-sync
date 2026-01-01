@@ -1,0 +1,24 @@
+# Navigate to your project folder
+cd "path/to/API connector"
+
+# Create .gitignore file
+cat > .gitignore << EOF
+# Environment variables
+.env
+
+# Log files
+*.log
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+
+# Results
+sync_results.json
+
+# IDE
+.vscode/
+.idea/
+EOF
