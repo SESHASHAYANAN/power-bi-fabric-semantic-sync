@@ -1,4 +1,3 @@
-
 import os
 import json
 import logging
@@ -25,20 +24,16 @@ file_formatter = logging.Formatter(
 )
 file_handler.setFormatter(file_formatter)
 
-# Console handler - logs INFO and above to console
+
 console_handler = logging.StreamHandler()
 console_handler.setLevel(logging.INFO)
 console_formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
 console_handler.setFormatter(console_formatter)
 
-# Add handlers to logger
+
 logger.addHandler(file_handler)
 logger.addHandler(console_handler)
 
-
-# =============================================================================
-# SECTION B: ENUMS & CONSTANTS
-# =============================================================================
 
 
 class SyncDirection(Enum):
@@ -63,7 +58,7 @@ class DataTypeMapping:
         "double": "FLOAT",
         "decimal": "DECIMAL(18,2)",
         "string": "VARCHAR(4000)",
-        "text": "VARCHAR(16777216)",  # Snowflake max VARCHAR
+        "text": "VARCHAR(16777216)", 
         "boolean": "BOOLEAN",
         "datetime": "TIMESTAMP_NTZ",
         "date": "DATE",
@@ -87,11 +82,6 @@ class DataTypeMapping:
         """
         normalized_type = fabric_type.lower().strip()
         return cls._type_map.get(normalized_type, "VARCHAR(4000)")
-
-
-# =============================================================================
-# SECTION C: DATA CLASSES
-# =============================================================================
 
 
 @dataclass
@@ -210,10 +200,6 @@ class SemanticModel:
     modified_date: str = ""
 
 
-# =============================================================================
-# SECTION D: FABRIC API CLIENT CLASS
-# =============================================================================
-
 
 class FabricApiClient:
     """
@@ -243,11 +229,10 @@ class FabricApiClient:
         self.access_token: Optional[str] = None
         self.token_expiry: Optional[datetime] = None
 
-        # HTTP session for connection pooling
+       
         self.session: requests.Session = requests.Session()
         self.session.headers.update({"Content-Type": "application/json"})
 
-        # Retry configuration
         self.max_retries: int = 3
         self.retry_delay: float = 1.0
         self.timeout: int = 30
@@ -275,9 +260,11 @@ class FabricApiClient:
 
         for attempt in range(self.max_retries):
             try:
+                
                 response = self.session.post(
                     self.auth_url,
                     data=payload,
+                    headers={"Content-Type": "application/x-www-form-urlencoded"},
                     timeout=self.timeout,
                 )
 
@@ -286,7 +273,7 @@ class FabricApiClient:
                     self.access_token = token_data.get("access_token")
                     expires_in = token_data.get("expires_in", 3600)
 
-                    # Set expiry with 5-minute buffer
+                  
                     self.token_expiry = datetime.now() + timedelta(
                         seconds=expires_in - 300
                     )
@@ -295,7 +282,7 @@ class FabricApiClient:
                     return True
 
                 elif response.status_code == 429:
-                    # Rate limited - wait and retry
+                   
                     retry_after = int(response.headers.get("Retry-After", 60))
                     logger.warning(
                         f"Rate limited. Waiting {retry_after} seconds..."
@@ -564,11 +551,6 @@ class FabricApiClient:
         return False
 
 
-# =============================================================================
-# SECTION E: SNOWFLAKE CONNECTOR CLASS
-# =============================================================================
-
-
 class SnowflakeConnector:
     """
     Connector for interacting with Snowflake database.
@@ -701,19 +683,19 @@ class SnowflakeConnector:
             return False
 
         try:
-            # Build dimensions clause
+           
             dim_clauses = [
                 f"{name} {dtype}" for name, dtype in dimensions.items()
             ]
             dimensions_sql = ", ".join(dim_clauses)
 
-            # Build measures clause
+          
             measure_clauses = [
                 f"{name} := {expr}" for name, expr in measures.items()
             ]
             measures_sql = ", ".join(measure_clauses)
 
-            # Construct DDL statement
+           
             ddl = f"""
             CREATE OR REPLACE SEMANTIC VIEW {self.schema}.{view_name}
             USING ({table_definition})
@@ -729,7 +711,7 @@ class SnowflakeConnector:
             return True
 
         except snowflake.connector.errors.ProgrammingError as e:
-            # Semantic views might not be available, try creating regular view
+           
             logger.warning(
                 f"Semantic view not supported, creating standard view: {e}"
             )
@@ -761,7 +743,7 @@ class SnowflakeConnector:
             True if view was created successfully, False otherwise.
         """
         try:
-            # Build column list
+            
             all_columns = list(dimensions.keys()) + [
                 f"{expr} AS {name}" for name, expr in measures.items()
             ]
@@ -832,11 +814,6 @@ class SnowflakeConnector:
         return False
 
 
-# =============================================================================
-# SECTION F: SEMANTIC SYNC ENGINE CLASS
-# =============================================================================
-
-
 class SemanticSyncEngine:
     """
     Main orchestration engine for synchronizing semantic models
@@ -885,7 +862,7 @@ class SemanticSyncEngine:
         }
         self.sync_log.append(event)
 
-        # Also log using standard logger
+       
         log_level = getattr(logging, severity.upper(), logging.INFO)
         logger.log(log_level, f"[{event_type}] {message}")
 
@@ -898,7 +875,7 @@ class SemanticSyncEngine:
         """
         self.log_event("DISCOVERY", "Starting Fabric model discovery")
 
-        # Authenticate with Fabric
+        
         if not self.fabric_client.authenticate():
             self.log_event(
                 "ERROR",
@@ -907,7 +884,7 @@ class SemanticSyncEngine:
             )
             return []
 
-        # Get list of models
+       
         model_list = self.fabric_client.get_semantic_models()
 
         if not model_list:
@@ -954,10 +931,10 @@ class SemanticSyncEngine:
         Returns:
             Populated SemanticModel object.
         """
-        # Parse tables
+        
         tables: List[Table] = []
         for table_data in model_dict.get("tables", []):
-            # Parse columns
+           
             columns: List[Column] = []
             for col_data in table_data.get("columns", []):
                 column = Column(
@@ -969,7 +946,7 @@ class SemanticSyncEngine:
                 )
                 columns.append(column)
 
-            # Parse measures
+            
             measures: List[Measure] = []
             for measure_data in table_data.get("measures", []):
                 measure = Measure(
@@ -998,7 +975,7 @@ class SemanticSyncEngine:
             )
             tables.append(table)
 
-        # Parse relationships
+        
         relationships: List[Relationship] = []
         for rel_data in model_dict.get("relationships", []):
             relationship = Relationship(
@@ -1041,7 +1018,7 @@ class SemanticSyncEngine:
         """
         self.log_event("SYNC_START", "Starting sync to Snowflake")
 
-        # Connect to Snowflake
+        
         if not self.snowflake_connector.connect():
             self.log_event(
                 "ERROR",
@@ -1056,12 +1033,12 @@ class SemanticSyncEngine:
         for model in models:
             for table in model.tables:
                 try:
-                    # Create view name from model and table
+                   
                     view_name = self._sanitize_name(
                         f"sv_{model.name}_{table.name}"
                     )
 
-                    # Build dimensions from columns
+                 
                     dimensions: Dict[str, str] = {}
                     for column in table.columns:
                         if not column.is_hidden:
@@ -1070,22 +1047,22 @@ class SemanticSyncEngine:
                             )
                             dimensions[column.name] = snowflake_type
 
-                    # Build measures
+                   
                     measures: Dict[str, str] = {}
                     for measure in table.measures:
-                        # Convert DAX to SQL-compatible expression
+                       
                         measures[measure.name] = self._convert_dax_to_sql(
                             measure.expression
                         )
 
-                    # Use table source or fallback
+                 
                     table_def = (
                         table.source_expression
                         if table.source_expression
                         else f"{model.name}.{table.name}"
                     )
 
-                    # Create the semantic view
+                   
                     if self.snowflake_connector.create_semantic_view(
                         view_name=view_name,
                         table_definition=table_def,
@@ -1113,7 +1090,6 @@ class SemanticSyncEngine:
                     )
                     failed += 1
 
-        # Disconnect from Snowflake
         self.snowflake_connector.disconnect()
 
         self.log_event(
@@ -1132,11 +1108,11 @@ class SemanticSyncEngine:
         Returns:
             Sanitized name suitable for Snowflake.
         """
-        # Replace spaces and special characters
+       
         sanitized = name.replace(" ", "_").replace("-", "_")
-        # Remove any remaining non-alphanumeric characters except underscore
+       
         sanitized = "".join(c for c in sanitized if c.isalnum() or c == "_")
-        # Ensure it doesn't start with a number
+      
         if sanitized and sanitized[0].isdigit():
             sanitized = f"v_{sanitized}"
         return sanitized.lower()
@@ -1154,10 +1130,10 @@ class SemanticSyncEngine:
         Returns:
             SQL-compatible expression string.
         """
-        # Basic DAX to SQL conversions
+      
         sql_expr = expression
 
-        # Replace common DAX functions with SQL equivalents
+      
         replacements = {
             "SUM(": "SUM(",
             "COUNT(": "COUNT(",
@@ -1259,7 +1235,6 @@ def main() -> None:
 
     sync_engine = SemanticSyncEngine(SyncDirection.BIDIRECTIONAL)
 
-n
     results = sync_engine.run_sync()
 
     logger.info("=" * 80)
