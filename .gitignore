@@ -1,24 +1,41 @@
-# Navigate to your project folder
-cd "path/to/API connector"
-
-# Create .gitignore file
-cat > .gitignore << EOF
-# Environment variables
+# Credentials
 .env
+.env.local
 
-# Log files
-*.log
-
-# Python cache
+# Python
 __pycache__/
 *.py[cod]
 *$py.class
-*.pyc
+*.so
+.Python
+env/
+venv/
+.env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
 
-# Results
+# Logs
+*.log
+semantic_sync.log
+
+# Data
 sync_results.json
+*.csv
+*.xlsx
 
-# IDE
-.vscode/
-.idea/
-EOF
+# OS
+.DS_Store
+Thumbs.db
