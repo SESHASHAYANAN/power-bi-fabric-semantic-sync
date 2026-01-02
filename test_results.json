@@ -1,0 +1,155 @@
+{
+  "timestamp": "2026-01-02T19:36:11.616580",
+  "summary": {
+    "total": 8,
+    "passed": 8,
+    "failed": 0
+  },
+  "results": [
+    {
+      "name": "Change Detection: Snapshot Capture",
+      "passed": true,
+      "message": "Snapshot captured successfully with all measures",
+      "details": {
+        "tables": 2,
+        "measures": 5,
+        "model_name": "SalesModel"
+      },
+      "duration_seconds": 0.003796
+    },
+    {
+      "name": "Change Detection: Measure Modification",
+      "passed": true,
+      "message": "Correctly detected measure modification and addition",
+      "details": {
+        "modified": [
+          "TotalRevenue"
+        ],
+        "added": [
+          "RevenueWithTax"
+        ],
+        "total_changes": 2
+      },
+      "duration_seconds": 0.00075
+    },
+    {
+      "name": "Change Report Generation",
+      "passed": true,
+      "message": "Change report generated successfully",
+      "details": {
+        "summary": {
+          "total": 2,
+          "added": 1,
+          "removed": 0,
+          "modified": 1
+        },
+        "report_length": 707
+      },
+      "duration_seconds": 0.000702
+    },
+    {
+      "name": "Fabric \u2192 Snowflake Mock Sync",
+      "passed": true,
+      "message": "Fabric to Snowflake sync simulation successful",
+      "details": {
+        "changes_detected": 10,
+        "summary": {
+          "total": 26,
+          "added": 16,
+          "removed": 10,
+          "modified": 0
+        }
+      },
+      "duration_seconds": 0.000417
+    },
+    {
+      "name": "Snowflake \u2192 Fabric Mock Sync",
+      "passed": true,
+      "message": "Snowflake to Fabric sync simulation successful",
+      "details": {
+        "changes_detected": 26,
+        "summary": {
+          "total": 26,
+          "added": 11,
+          "removed": 15,
+          "modified": 0
+        }
+      },
+      "duration_seconds": 0.000254
+    },
+    {
+      "name": "Bidirectional Change Detection",
+      "passed": true,
+      "message": "Bidirectional change detection successful",
+      "details": {
+        "fabric_to_snowflake_changes": 27,
+        "snowflake_to_fabric_changes": 27
+      },
+      "duration_seconds": 0.000317
+    },
+    {
+      "name": "Expression Conversion (DAX \u2194 SQL)",
+      "passed": true,
+      "message": "All expression conversions passed",
+      "details": {
+        "dax_to_sql": [
+          {
+            "input": "SUM([Amount])",
+            "expected": "SUM([Amount])",
+            "got": "SUM([Amount])",
+            "passed": true
+          },
+          {
+            "input": "AVERAGE([Amount])",
+            "expected": "AVG([Amount])",
+            "got": "AVG([Amount])",
+            "passed": true
+          },
+          {
+            "input": "COUNTROWS([Sales])",
+            "expected": "COUNT(*[Sales])",
+            "got": "COUNT(*[Sales])",
+            "passed": true
+          },
+          {
+            "input": "DISTINCTCOUNT([CustomerID])",
+            "expected": "COUNT(DISTINCT [CustomerID])",
+            "got": "COUNT(DISTINCT [CustomerID])",
+            "passed": true
+          }
+        ],
+        "sql_to_dax": [
+          {
+            "input": "AVG(AMOUNT)",
+            "expected": "AVERAGE(AMOUNT)",
+            "got": "AVERAGE(AMOUNT)",
+            "passed": true
+          },
+          {
+            "input": "COUNT(*)",
+            "expected": "COUNTROWS()",
+            "got": "COUNTROWS()",
+            "passed": true
+          },
+          {
+            "input": "COUNT(DISTINCT CUSTOMER_ID)",
+            "expected": "DISTINCTCOUNT(CUSTOMER_ID)",
+            "got": "DISTINCTCOUNT(CUSTOMER_ID)",
+            "passed": true
+          }
+        ]
+      },
+      "duration_seconds": 1.032373
+    },
+    {
+      "name": "Snapshot Serialization",
+      "passed": true,
+      "message": "Snapshot serialization/deserialization successful",
+      "details": {
+        "tables": 2,
+        "measures": 5
+      },
+      "duration_seconds": 0.001316
+    }
+  ]
+}

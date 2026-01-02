@@ -22,3 +22,4 @@ sync_results.json
 .vscode/
 .idea/
 EOF
+.env.example

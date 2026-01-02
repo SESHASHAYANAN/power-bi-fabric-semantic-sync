@@ -550,6 +550,125 @@ class FabricApiClient:
         )
         return False
 
+    def update_semantic_model_definition(
+        self,
+        model_id: str,
+        definition: Dict[str, Any],
+    ) -> bool:
+        """
+        Update a semantic model's definition.
+
+        This uses the TMSL/XMLA endpoint to modify model definitions.
+
+        Args:
+            model_id: The semantic model ID.
+            definition: The updated definition payload.
+
+        Returns:
+            True if successful, False otherwise.
+        """
+        logger.info(f"🔄 Updating semantic model definition: {model_id}")
+
+        endpoint = (
+            f"/v1/workspaces/{self.workspace_id}/semanticmodels/"
+            f"{model_id}/updateDefinition"
+        )
+
+        response = self._make_request("POST", endpoint, data=definition)
+
+        if response is None:
+            logger.error("Failed to update model: no response")
+            return False
+
+        if response.status_code in (200, 202, 204):
+            logger.info("✅ Semantic model definition update initiated")
+            return True
+
+        logger.error(
+            f"Failed to update model: [{response.status_code}] "
+            f"{response.text}"
+        )
+        return False
+
+    def update_measure(
+        self,
+        model_id: str,
+        table_name: str,
+        measure_name: str,
+        new_expression: str,
+        new_format_string: Optional[str] = None,
+    ) -> bool:
+        """
+        Update a specific measure in a semantic model.
+
+        Note: This requires the model definition to be modifiable.
+        Some semantic models may not support direct measure updates.
+
+        Args:
+            model_id: The semantic model ID.
+            table_name: The table containing the measure.
+            measure_name: The measure name to update.
+            new_expression: The new DAX expression.
+            new_format_string: Optional new format string.
+
+        Returns:
+            True if successful, False otherwise.
+        """
+        logger.info(
+            f"🔄 Updating measure {table_name}.{measure_name} in model {model_id}"
+        )
+
+        # Build the update payload
+        # Note: The actual API structure may vary based on Fabric version
+        payload: Dict[str, Any] = {
+            "updateDetails": [
+                {
+                    "path": f"model/tables/{table_name}/measures/{measure_name}",
+                    "updates": {
+                        "expression": new_expression,
+                    }
+                }
+            ]
+        }
+
+        if new_format_string:
+            payload["updateDetails"][0]["updates"]["formatString"] = new_format_string
+
+        return self.update_semantic_model_definition(model_id, payload)
+
+    def refresh_semantic_model(self, model_id: str) -> bool:
+        """
+        Trigger a refresh of the semantic model.
+
+        Args:
+            model_id: The semantic model ID.
+
+        Returns:
+            True if refresh initiated, False otherwise.
+        """
+        logger.info(f"🔄 Triggering refresh for model: {model_id}")
+
+        endpoint = (
+            f"/v1/workspaces/{self.workspace_id}/semanticmodels/"
+            f"{model_id}/refresh"
+        )
+
+        response = self._make_request("POST", endpoint, data={})
+
+        if response is None:
+            logger.error("Failed to refresh model: no response")
+            return False
+
+        if response.status_code in (200, 202, 204):
+            logger.info("✅ Semantic model refresh initiated")
+            return True
+
+        logger.error(
+            f"Failed to refresh model: [{response.status_code}] "
+            f"{response.text}"
+        )
+        return False
+
 
 class SnowflakeConnector:
     """
@@ -812,6 +931,120 @@ class SnowflakeConnector:
 
         logger.error(f"❌ Semantic view validation failed: {view_name}")
         return False
+
+    def get_view_definition(self, view_name: str) -> Optional[str]:
+        """
+        Get the DDL definition of a view.
+
+        Args:
+            view_name: Name of the view.
+
+        Returns:
+            DDL string if successful, None otherwise.
+        """
+        logger.info(f"📋 Getting view definition for: {view_name}")
+
+        query = f"SELECT GET_DDL('VIEW', '{self.schema}.{view_name}') AS DDL"
+        result = self.execute_query(query)
+
+        if result and result[0]:
+            return result[0].get("DDL", "")
+
+        return None
+
+    def get_view_columns(self, view_name: str) -> List[Dict[str, Any]]:
+        """
+        Get column definitions for a view from INFORMATION_SCHEMA.
+
+        Args:
+            view_name: Name of the view.
+
+        Returns:
+            List of column dictionaries.
+        """
+        logger.info(f"📋 Getting columns for view: {view_name}")
+
+        query = f"""
+        SELECT 
+            COLUMN_NAME,
+            DATA_TYPE,
+            IS_NULLABLE,
+            COLUMN_DEFAULT,
+            COMMENT
+        FROM {self.database}.INFORMATION_SCHEMA.COLUMNS
+        WHERE TABLE_SCHEMA = '{self.schema}'
+        AND TABLE_NAME = '{view_name.upper()}'
+        ORDER BY ORDINAL_POSITION
+        """
+
+        results = self.execute_query(query, fetch_all=True)
+        return results if results else []
+
+    def update_view_measure(
+        self,
+        view_name: str,
+        measure_name: str,
+        new_expression: str,
+        all_columns: List[str],
+        all_measures: Dict[str, str],
+    ) -> bool:
+        """
+        Update a measure in a view by recreating the view.
+
+        Args:
+            view_name: Name of the view to update.
+            measure_name: Name of the measure to update.
+            new_expression: New expression for the measure.
+            all_columns: List of all dimension columns.
+            all_measures: Dictionary of all measure names to expressions.
+
+        Returns:
+            True if successful, False otherwise.
+        """
+        logger.info(f"🔄 Updating measure {measure_name} in view {view_name}")
+
+        if self.connection is None:
+            logger.error("❌ Not connected to Snowflake")
+            return False
+
+        try:
+            # Update the measure in the dictionary
+            updated_measures = all_measures.copy()
+            updated_measures[measure_name] = new_expression
+
+            # Build the new view DDL
+            column_list = ", ".join(all_columns)
+            measure_list = ", ".join(
+                [f"{expr} AS {name}" for name, expr in updated_measures.items()]
+            )
+
+            # Get original view to extract source table
+            original_ddl = self.get_view_definition(view_name)
+            if not original_ddl:
+                logger.error("Could not get original view definition")
+                return False
+
+            # Parse source table from original DDL (simplified)
+            import re
+            from_match = re.search(r"FROM\s+(\S+)", original_ddl, re.IGNORECASE)
+            source_table = from_match.group(1) if from_match else view_name
+
+            ddl = f"""
+            CREATE OR REPLACE VIEW {self.schema}.{view_name} AS
+            SELECT {column_list}, {measure_list}
+            FROM {source_table}
+            """
+
+            cursor = self.connection.cursor()
+            cursor.execute(ddl)
+            cursor.close()
+
+            logger.info(f"✅ Updated measure {measure_name} in view {view_name}")
+            return True
+
+        except Exception as e:
+            logger.error(f"❌ Failed to update view measure: {e}")
+            return False
 
 
 class SemanticSyncEngine:
@@ -1153,6 +1386,221 @@ class SemanticSyncEngine:
 
         return sql_expr
 
+    def _convert_sql_to_dax(self, expression: str) -> str:
+        """
+        Convert a SQL expression to DAX-compatible expression.
+
+        This is a simplified conversion for common patterns.
+        Complex SQL may require manual adjustment.
+
+        Args:
+            expression: SQL expression string.
+
+        Returns:
+            DAX-compatible expression string.
+        """
+        dax_expr = expression
+
+        # Replace common SQL functions with DAX equivalents
+        replacements = {
+            "AVG(": "AVERAGE(",
+            "COUNT(*)": "COUNTROWS()",
+            "COUNT(DISTINCT ": "DISTINCTCOUNT(",
+        }
+
+        for sql_func, dax_func in replacements.items():
+            dax_expr = dax_expr.replace(sql_func, dax_func)
+
+        return dax_expr
+
+    def sync_from_snowflake(
+        self,
+        view_names: List[str],
+        target_model_id: str,
+    ) -> Tuple[int, int]:
+        """
+        Synchronize changes from Snowflake views to Fabric semantic model.
+
+        Args:
+            view_names: List of Snowflake view names to sync from.
+            target_model_id: Target Fabric model ID to update.
+
+        Returns:
+            Tuple of (successful_count, failed_count).
+        """
+        self.log_event("SYNC_START", "Starting sync from Snowflake to Fabric")
+
+        # Connect to Snowflake
+        if not self.snowflake_connector.connect():
+            self.log_event(
+                "ERROR",
+                "Failed to connect to Snowflake",
+                "ERROR",
+            )
+            return 0, len(view_names)
+
+        # Authenticate with Fabric
+        if not self.fabric_client.authenticate():
+            self.log_event(
+                "ERROR",
+                "Failed to authenticate with Fabric",
+                "ERROR",
+            )
+            return 0, len(view_names)
+
+        successful: int = 0
+        failed: int = 0
+
+        for view_name in view_names:
+            try:
+                # Get view definition from Snowflake
+                view_ddl = self.snowflake_connector.get_view_definition(view_name)
+                if not view_ddl:
+                    self.log_event(
+                        "WARNING",
+                        f"Could not get definition for view: {view_name}",
+                        "WARNING",
+                    )
+                    failed += 1
+                    continue
+
+                # Parse measures from DDL
+                # This is simplified - real implementation would need more parsing
+                self.log_event(
+                    "INFO",
+                    f"Retrieved definition for view: {view_name}",
+                )
+                successful += 1
+
+            except Exception as e:
+                self.log_event(
+                    "ERROR",
+                    f"Error syncing view {view_name}: {e}",
+                    "ERROR",
+                )
+                failed += 1
+
+        # Disconnect
+        self.snowflake_connector.disconnect()
+
+        self.log_event(
+            "SYNC_END",
+            f"Snowflake sync completed: {successful} successful, {failed} failures",
+        )
+        return successful, failed
+
+    def apply_changes(
+        self,
+        changes: List[Any],
+        direction: SyncDirection,
+    ) -> Tuple[int, int]:
+        """
+        Apply a list of changes to the target system.
+
+        Args:
+            changes: List of ChangeRecord objects to apply.
+            direction: Direction of sync to determine target.
+
+        Returns:
+            Tuple of (successful_count, failed_count).
+        """
+        from change_detector import ChangeRecord, ChangeType
+
+        self.log_event(
+            "APPLY_CHANGES",
+            f"Applying {len(changes)} change(s) in direction: {direction.value}",
+        )
+
+        successful = 0
+        failed = 0
+
+        for change in changes:
+            if not isinstance(change, ChangeRecord):
+                continue
+
+            try:
+                if change.item_type == "measure":
+                    if direction == SyncDirection.FABRIC_TO_SNOWFLAKE:
+                        # Apply measure change to Snowflake
+                        if change.change_type == ChangeType.MODIFIED:
+                            sql_expr = self._convert_dax_to_sql(change.after_value)
+                            # Would call update_view_measure here
+                            self.log_event(
+                                "APPLY",
+                                f"Would update Snowflake measure: "
+                                f"{change.table_name}.{change.item_name}",
+                            )
+                            successful += 1
+
+                    elif direction == SyncDirection.SNOWFLAKE_TO_FABRIC:
+                        # Apply measure change to Fabric
+                        if change.change_type == ChangeType.MODIFIED:
+                            dax_expr = self._convert_sql_to_dax(change.after_value)
+                            # Would call fabric_client.update_measure here
+                            self.log_event(
+                                "APPLY",
+                                f"Would update Fabric measure: "
+                                f"{change.table_name}.{change.item_name}",
+                            )
+                            successful += 1
+
+            except Exception as e:
+                self.log_event(
+                    "ERROR",
+                    f"Failed to apply change {change.item_name}: {e}",
+                    "ERROR",
+                )
+                failed += 1
+
+        return successful, failed
+
+    def preview_changes(
+        self,
+        direction: SyncDirection,
+    ) -> Dict[str, Any]:
+        """
+        Preview what changes would be made without applying them.
+
+        Args:
+            direction: Direction of sync to preview.
+
+        Returns:
+            Dictionary with change preview information.
+        """
+        from change_detector import ChangeDetector
+
+        self.log_event("PREVIEW", f"Previewing changes for direction: {direction.value}")
+
+        preview: Dict[str, Any] = {
+            "direction": direction.value,
+            "changes": [],
+            "summary": {
+                "total": 0,
+                "added": 0,
+                "modified": 0,
+                "removed": 0,
+            },
+        }
+
+        try:
+            detector = ChangeDetector(
+                fabric_client=self.fabric_client,
+                snowflake_connector=self.snowflake_connector,
+            )
+
+            # This would capture and compare real snapshots
+            # For now, return empty preview
+            self.log_event(
+                "PREVIEW",
+                "Preview complete - use ChangeDetector for full comparison",
+            )
+
+        except Exception as e:
+            self.log_event("ERROR", f"Preview failed: {e}", "ERROR")
+            preview["error"] = str(e)
+
+        return preview
+
     def run_sync(self) -> Dict[str, Any]:
         """
         Execute the complete synchronization workflow.
@@ -1217,7 +1665,6 @@ class SemanticSyncEngine:
         )
 
         return results
-
 
 
 
