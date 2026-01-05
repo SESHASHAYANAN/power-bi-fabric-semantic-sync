@@ -1,0 +1,106 @@
+{
+  "name": "UPLOADED_TEST_EMPLOYEES",
+  "displayName": "Uploaded Test Employees",
+  "description": "Synced from Snowflake on 2026-01-05T15:39:32.220748",
+  "tables": [
+    {
+      "name": "UPLOADED_TEST_EMPLOYEES",
+      "displayName": "Uploaded Test Employees",
+      "columns": [
+        {
+          "name": "id",
+          "displayName": "Id",
+          "dataType": "String",
+          "isHidden": false,
+          "description": "Column from Snowflake table UPLOADED_TEST_EMPLOYEES"
+        },
+        {
+          "name": "name",
+          "displayName": "Name",
+          "dataType": "String",
+          "isHidden": false,
+          "description": "Column from Snowflake table UPLOADED_TEST_EMPLOYEES"
+        },
+        {
+          "name": "age",
+          "displayName": "Age",
+          "dataType": "String",
+          "isHidden": false,
+          "description": "Column from Snowflake table UPLOADED_TEST_EMPLOYEES"
+        },
+        {
+          "name": "department",
+          "displayName": "Department",
+          "dataType": "String",
+          "isHidden": false,
+          "description": "Column from Snowflake table UPLOADED_TEST_EMPLOYEES"
+        },
+        {
+          "name": "salary",
+          "displayName": "Salary",
+          "dataType": "String",
+          "isHidden": false,
+          "description": "Column from Snowflake table UPLOADED_TEST_EMPLOYEES"
+        }
+      ],
+      "measures": [],
+      "partitions": [
+        {
+          "name": "Partition1",
+          "mode": "import"
+        }
+      ]
+    }
+  ],
+  "relationships": [],
+  "annotations": [
+    {
+      "name": "SyncedFromSnowflake",
+      "value": "2026-01-05T15:39:32.220748"
+    }
+  ],
+  "sampleData": [
+    {
+      "id": 1,
+      "name": "Alice",
+      "age": 25,
+      "department": "Engineering",
+      "salary": 75000.5
+    },
+    {
+      "id": 2,
+      "name": "Bob",
+      "age": 30,
+      "department": "Sales",
+      "salary": 65000.0
+    },
+    {
+      "id": 3,
+      "name": "Charlie",
+      "age": 35,
+      "department": "Marketing",
+      "salary": 72000.25
+    },
+    {
+      "id": 4,
+      "name": "Diana",
+      "age": 28,
+      "department": "HR",
+      "salary": 58000.0
+    },
+    {
+      "id": 5,
+      "name": "Eve",
+      "age": 32,
+      "department": "Engineering",
+      "salary": 85000.75
+    }
+  ],
+  "rowCount": 5,
+  "syncMetadata": {
+    "source": "file_upload",
+    "sourceFile": "UPLOADED_TEST_EMPLOYEES.json",
+    "syncedAt": "2026-01-05T15:39:32.220748",
+    "rowCount": 5
+  }
+}

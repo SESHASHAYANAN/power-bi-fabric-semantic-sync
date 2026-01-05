@@ -1,0 +1,146 @@
+{
+  "table_name": "TBL_FABRIC_INDUSTRY_INDUSTRY",
+  "source": "snowflake",
+  "synced_at": "2026-01-05T19:38:44.024837",
+  "columns": [
+    {
+      "name": "COLUMN1",
+      "dataType": "VARCHAR(16777216)"
+    }
+  ],
+  "row_count": 44,
+  "data": [
+    {
+      "COLUMN1": "Industry"
+    },
+    {
+      "COLUMN1": "Accounting/Finance"
+    },
+    {
+      "COLUMN1": "Advertising/Public Relations"
+    },
+    {
+      "COLUMN1": "Aerospace/Aviation"
+    },
+    {
+      "COLUMN1": "Arts/Entertainment/Publishing"
+    },
+    {
+      "COLUMN1": "Automotive"
+    },
+    {
+      "COLUMN1": "Banking/Mortgage"
+    },
+    {
+      "COLUMN1": "Business Development"
+    },
+    {
+      "COLUMN1": "Business Opportunity"
+    },
+    {
+      "COLUMN1": "Clerical/Administrative"
+    },
+    {
+      "COLUMN1": "Construction/Facilities"
+    },
+    {
+      "COLUMN1": "Consumer Goods"
+    },
+    {
+      "COLUMN1": "Customer Service"
+    },
+    {
+      "COLUMN1": "Education/Training"
+    },
+    {
+      "COLUMN1": "Energy/Utilities"
+    },
+    {
+      "COLUMN1": "Engineering"
+    },
+    {
+      "COLUMN1": "Government/Military"
+    },
+    {
+      "COLUMN1": "Green"
+    },
+    {
+      "COLUMN1": "Healthcare"
+    },
+    {
+      "COLUMN1": "Hospitality/Travel"
+    },
+    {
+      "COLUMN1": "Human Resources"
+    },
+    {
+      "COLUMN1": "Installation/Maintenance"
+    },
+    {
+      "COLUMN1": "Insurance"
+    },
+    {
+      "COLUMN1": "Internet"
+    },
+    {
+      "COLUMN1": "Job Search Aids"
+    },
+    {
+      "COLUMN1": "Law Enforcement/Security"
+    },
+    {
+      "COLUMN1": "Legal"
+    },
+    {
+      "COLUMN1": "Management/Executive"
+    },
+    {
+      "COLUMN1": "Manufacturing/Operations"
+    },
+    {
+      "COLUMN1": "Marketing"
+    },
+    {
+      "COLUMN1": "Non-Profit/Volunteer"
+    },
+    {
+      "COLUMN1": "Pharmaceutical/Biotech"
+    },
+    {
+      "COLUMN1": "Professional Services"
+    },
+    {
+      "COLUMN1": "QA/Quality Control"
+    },
+    {
+      "COLUMN1": "Real Estate"
+    },
+    {
+      "COLUMN1": "Restaurant/Food Service"
+    },
+    {
+      "COLUMN1": "Retail"
+    },
+    {
+      "COLUMN1": "Sales"
+    },
+    {
+      "COLUMN1": "Science/Research"
+    },
+    {
+      "COLUMN1": "Skilled Labor"
+    },
+    {
+      "COLUMN1": "Technology"
+    },
+    {
+      "COLUMN1": "Telecommunications"
+    },
+    {
+      "COLUMN1": "Transportation/Logistics"
+    },
+    {
+      "COLUMN1": "Other"
+    }
+  ]
+}

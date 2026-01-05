@@ -1,0 +1,37 @@
+{
+  "table_name": "TBL_FABRIC_SALES_SALES",
+  "source": "snowflake",
+  "synced_at": "2026-01-05T19:38:44.029517",
+  "columns": [
+    {
+      "name": "COLUMN1",
+      "dataType": "VARCHAR(16777216)"
+    },
+    {
+      "name": "COLUMN2",
+      "dataType": "VARCHAR(16777216)"
+    },
+    {
+      "name": "COLUMN3",
+      "dataType": "VARCHAR(16777216)"
+    }
+  ],
+  "row_count": 3,
+  "data": [
+    {
+      "COLUMN1": "1",
+      "COLUMN2": "Widget A",
+      "COLUMN3": "100"
+    },
+    {
+      "COLUMN1": "2",
+      "COLUMN2": "Widget B",
+      "COLUMN3": "250"
+    },
+    {
+      "COLUMN1": "3",
+      "COLUMN2": "Widget C",
+      "COLUMN3": "75"
+    }
+  ]
+}

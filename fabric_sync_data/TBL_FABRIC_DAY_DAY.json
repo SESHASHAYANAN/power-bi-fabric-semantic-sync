@@ -1,0 +1,177 @@
+{
+  "table_name": "TBL_FABRIC_DAY_DAY",
+  "source": "snowflake",
+  "synced_at": "2026-01-05T19:38:44.021521",
+  "columns": [
+    {
+      "name": "NUMERIC",
+      "dataType": "NUMBER(19,0)"
+    },
+    {
+      "name": "NUMERIC_2",
+      "dataType": "NUMBER(19,0)"
+    },
+    {
+      "name": "NUMERIC_SUFFIX",
+      "dataType": "VARCHAR(16777216)"
+    }
+  ],
+  "row_count": 31,
+  "data": [
+    {
+      "NUMERIC": 1,
+      "NUMERIC_2": 1,
+      "NUMERIC_SUFFIX": "1st"
+    },
+    {
+      "NUMERIC": 2,
+      "NUMERIC_2": 2,
+      "NUMERIC_SUFFIX": "2nd"
+    },
+    {
+      "NUMERIC": 3,
+      "NUMERIC_2": 3,
+      "NUMERIC_SUFFIX": "3rd"
+    },
+    {
+      "NUMERIC": 4,
+      "NUMERIC_2": 4,
+      "NUMERIC_SUFFIX": "4th"
+    },
+    {
+      "NUMERIC": 5,
+      "NUMERIC_2": 5,
+      "NUMERIC_SUFFIX": "5th"
+    },
+    {
+      "NUMERIC": 6,
+      "NUMERIC_2": 6,
+      "NUMERIC_SUFFIX": "6th"
+    },
+    {
+      "NUMERIC": 7,
+      "NUMERIC_2": 7,
+      "NUMERIC_SUFFIX": "7th"
+    },
+    {
+      "NUMERIC": 8,
+      "NUMERIC_2": 8,
+      "NUMERIC_SUFFIX": "8th"
+    },
+    {
+      "NUMERIC": 9,
+      "NUMERIC_2": 9,
+      "NUMERIC_SUFFIX": "9th"
+    },
+    {
+      "NUMERIC": 10,
+      "NUMERIC_2": 10,
+      "NUMERIC_SUFFIX": "10th"
+    },
+    {
+      "NUMERIC": 11,
+      "NUMERIC_2": 11,
+      "NUMERIC_SUFFIX": "11th"
+    },
+    {
+      "NUMERIC": 12,
+      "NUMERIC_2": 12,
+      "NUMERIC_SUFFIX": "12th"
+    },
+    {
+      "NUMERIC": 13,
+      "NUMERIC_2": 13,
+      "NUMERIC_SUFFIX": "13th"
+    },
+    {
+      "NUMERIC": 14,
+      "NUMERIC_2": 14,
+      "NUMERIC_SUFFIX": "14th"
+    },
+    {
+      "NUMERIC": 15,
+      "NUMERIC_2": 15,
+      "NUMERIC_SUFFIX": "15th"
+    },
+    {
+      "NUMERIC": 16,
+      "NUMERIC_2": 16,
+      "NUMERIC_SUFFIX": "16th"
+    },
+    {
+      "NUMERIC": 17,
+      "NUMERIC_2": 17,
+      "NUMERIC_SUFFIX": "17th"
+    },
+    {
+      "NUMERIC": 18,
+      "NUMERIC_2": 18,
+      "NUMERIC_SUFFIX": "18th"
+    },
+    {
+      "NUMERIC": 19,
+      "NUMERIC_2": 19,
+      "NUMERIC_SUFFIX": "19th"
+    },
+    {
+      "NUMERIC": 20,
+      "NUMERIC_2": 20,
+      "NUMERIC_SUFFIX": "20th"
+    },
+    {
+      "NUMERIC": 21,
+      "NUMERIC_2": 21,
+      "NUMERIC_SUFFIX": "21st"
+    },
+    {
+      "NUMERIC": 22,
+      "NUMERIC_2": 22,
+      "NUMERIC_SUFFIX": "22nd"
+    },
+    {
+      "NUMERIC": 23,
+      "NUMERIC_2": 23,
+      "NUMERIC_SUFFIX": "23rd"
+    },
+    {
+      "NUMERIC": 24,
+      "NUMERIC_2": 24,
+      "NUMERIC_SUFFIX": "24th"
+    },
+    {
+      "NUMERIC": 25,
+      "NUMERIC_2": 25,
+      "NUMERIC_SUFFIX": "25th"
+    },
+    {
+      "NUMERIC": 26,
+      "NUMERIC_2": 26,
+      "NUMERIC_SUFFIX": "26th"
+    },
+    {
+      "NUMERIC": 27,
+      "NUMERIC_2": 27,
+      "NUMERIC_SUFFIX": "27th"
+    },
+    {
+      "NUMERIC": 28,
+      "NUMERIC_2": 28,
+      "NUMERIC_SUFFIX": "28th"
+    },
+    {
+      "NUMERIC": 29,
+      "NUMERIC_2": 29,
+      "NUMERIC_SUFFIX": "29th"
+    },
+    {
+      "NUMERIC": 30,
+      "NUMERIC_2": 30,
+      "NUMERIC_SUFFIX": "30th"
+    },
+    {
+      "NUMERIC": 31,
+      "NUMERIC_2": 31,
+      "NUMERIC_SUFFIX": "31st"
+    }
+  ]
+}

@@ -1,0 +1,232 @@
+# Prometheus Alert Rules for Sync Orchestration
+# These alerts monitor the health and performance of the bidirectional sync system
+
+groups:
+  - name: sync_system_alerts
+    rules:
+      # ========================================
+      # CRITICAL ALERTS
+      # ========================================
+      
+      - alert: SyncChecksumMismatch
+        expr: increase(sync_checksum_mismatches_total[5m]) > 0
+        for: 0m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Data integrity issue: Checksum mismatch detected"
+          description: |
+            A checksum mismatch was detected during sync validation.
+            This indicates possible data corruption.
+            
+            Action Required:
+            1. Stop any ongoing syncs immediately
+            2. Check sync logs for affected SYNC_ID
+            3. Compare source and target data manually
+            4. Do NOT overwrite until investigation complete
+            5. Escalate to data team
+      
+      - alert: SyncFailureRateCritical
+        expr: |
+          (rate(sync_total{status="failed"}[1h]) / 
+           rate(sync_total[1h])) * 100 > 5
+        for: 10m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Critical: Sync failure rate exceeds 5%"
+          description: |
+            More than 5% of sync operations are failing.
+            Current failure rate: {{ $value | printf "%.2f" }}%
+            
+            Investigate immediately:
+            1. Check platform connectivity (Fabric, Snowflake)
+            2. Review recent changes to schemas
+            3. Check for rate limiting
+            4. Review error logs for patterns
+      
+      - alert: ConflictRequiresManualReview
+        expr: sync_conflicts_pending_review > 0
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Conflict detected requiring manual review"
+          description: |
+            A data conflict was detected that could not be auto-resolved.
+            Number of pending conflicts: {{ $value }}
+            
+            Action Required:
+            1. Review conflict details in conflict_log table
+            2. Determine authoritative version
+            3. Apply resolution manually
+            4. Update resolution in system
+      
+      # ========================================
+      # HIGH SEVERITY ALERTS
+      # ========================================
+      
+      - alert: SyncLatencyHigh
+        expr: histogram_quantile(0.95, rate(sync_duration_seconds_bucket[5m])) > 900
+        for: 15m
+        labels:
+          severity: high
+        annotations:
+          summary: "High sync latency detected (p95 > 15 min)"
+          description: |
+            95th percentile sync latency exceeds 15 minutes.
+            Current p95: {{ $value | printf "%.0f" }} seconds
+            
+            Target SLA: < 5 minutes (300s)
+            
+            Possible causes:
+            - Large data volumes
+            - Network congestion
+            - Platform throttling
+            - Schema complexity
+      
+      - alert: RetryQueueBacklog
+        expr: sync_retry_queue_size > 100
+        for: 30m
+        labels:
+          severity: high
+        annotations:
+          summary: "Retry queue backlog exceeds 100 items"
+          description: |
+            Current retry queue size: {{ $value }}
+            
+            This indicates:
+            - Persistent failures not being resolved
+            - Possible systemic issue with a platform
+            
+            Actions:
+            1. Check error types in queue
+            2. Identify common failure patterns
+            3. Consider pausing new syncs until cleared
+      
+      - alert: NoSyncsInWindow
+        expr: |
+          increase(sync_total[1h]) == 0 AND 
+          time() - sync_last_success_timestamp > 3600
+        for: 1h
+        labels:
+          severity: high
+        annotations:
+          summary: "No successful syncs in the last hour"
+          description: |
+            The sync system has not completed any successful syncs
+            in the last hour. This may indicate a system outage.
+            
+            Check:
+            1. Service health
+            2. Platform connectivity
+            3. Scheduler status
+            4. Authentication tokens
+      
+      # ========================================
+      # MEDIUM SEVERITY ALERTS
+      # ========================================
+      
+      - alert: SyncFailureRateElevated
+        expr: |
+          (rate(sync_total{status="failed"}[30m]) / 
+           rate(sync_total[30m])) * 100 > 1
+        for: 30m
+        labels:
+          severity: medium
+        annotations:
+          summary: "Elevated sync failure rate (> 1%)"
+          description: |
+            Sync failure rate is above normal threshold.
+            Current rate: {{ $value | printf "%.2f" }}%
+            
+            Monitor for escalation.
+      
+      - alert: ConflictsDetectedFrequently
+        expr: increase(sync_conflicts_detected_total[1h]) > 10
+        for: 0m
+        labels:
+          severity: medium
+        annotations:
+          summary: "Frequent conflicts detected"
+          description: |
+            More than 10 conflicts detected in the last hour.
+            Count: {{ $value }}
+            
+            This may indicate:
+            - Concurrent modifications from multiple sources
+            - Clock skew between systems
+            - Race conditions in sync timing
+      
+      - alert: PlatformConnectivityIssue
+        expr: |
+          up{job="fabric_connector"} == 0 OR 
+          up{job="snowflake_connector"} == 0
+        for: 5m
+        labels:
+          severity: medium
+        annotations:
+          summary: "Platform connectivity issue detected"
+          description: |
+            One or more platform connectors are not responding.
+            Fabric: {{ $labels.fabric_status }}
+            Snowflake: {{ $labels.snowflake_status }}
+      
+      # ========================================
+      # LOW SEVERITY / INFO ALERTS
+      # ========================================
+      
+      - alert: SyncVolumeAnomaly
+        expr: |
+          abs(rate(sync_total[1h]) - rate(sync_total[1h] offset 1d)) / 
+          rate(sync_total[1h] offset 1d) > 0.5
+        for: 2h
+        labels:
+          severity: low
+        annotations:
+          summary: "Unusual sync volume detected"
+          description: |
+            Sync volume differs significantly from same time yesterday.
+            This is informational - verify if expected.
+      
+      - alert: ValidationWarnings
+        expr: increase(sync_validation_warnings_total[1h]) > 5
+        for: 0m
+        labels:
+          severity: low
+        annotations:
+          summary: "Sync validation warnings"
+          description: |
+            Multiple validation warnings detected.
+            These may indicate minor schema drift or data quality issues.
+            Count: {{ $value }}
+
+  - name: sync_sla_alerts
+    rules:
+      - alert: SLABreachRisk
+        expr: sync_success_rate < 99.5
+        for: 30m
+        labels:
+          severity: high
+        annotations:
+          summary: "SLA breach risk: Success rate below 99.5%"
+          description: |
+            Current success rate: {{ $value | printf "%.2f" }}%
+            Target SLA: >= 99.5%
+            
+            Immediate attention required to prevent SLA breach.
+      
+      - alert: MTTRExceeded
+        expr: |
+          time() - sync_last_failure_resolution_timestamp > 900 AND
+          sync_retry_queue_size > 0
+        for: 15m
+        labels:
+          severity: high
+        annotations:
+          summary: "Mean Time to Recovery (MTTR) exceeded"
+          description: |
+            Failed syncs have not been resolved within 15 minute target.
+            Queue size: {{ $value }}
+            
+            Check automated retry status and escalate if needed.

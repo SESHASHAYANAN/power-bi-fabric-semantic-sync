@@ -1,0 +1,57 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "functionAppName": {
+            "value": "fabric-snowflake-sync"
+        },
+        "storageAccountName": {
+            "value": "fabricsfsyncstore"
+        },
+        "redisCacheName": {
+            "value": "fabric-sf-sync-cache"
+        },
+        "appInsightsName": {
+            "value": "fabric-sf-sync-insights"
+        },
+        "location": {
+            "value": "eastus"
+        },
+        "fabricTenantId": {
+            "value": "<YOUR_FABRIC_TENANT_ID>"
+        },
+        "fabricClientId": {
+            "value": "<YOUR_FABRIC_CLIENT_ID>"
+        },
+        "fabricClientSecret": {
+            "value": "<YOUR_FABRIC_CLIENT_SECRET>"
+        },
+        "fabricWorkspaceId": {
+            "value": "<YOUR_FABRIC_WORKSPACE_ID>"
+        },
+        "snowflakeAccount": {
+            "value": "<YOUR_SNOWFLAKE_ACCOUNT>"
+        },
+        "snowflakeUser": {
+            "value": "<YOUR_SNOWFLAKE_USER>"
+        },
+        "snowflakePassword": {
+            "value": "<YOUR_SNOWFLAKE_PASSWORD>"
+        },
+        "snowflakeWarehouse": {
+            "value": "SEMANTIC_SYNC_WH"
+        },
+        "snowflakeDatabase": {
+            "value": "ANALYTICS_DB"
+        },
+        "snowflakeSchema": {
+            "value": "SEMANTIC_LAYER"
+        },
+        "slackWebhookUrl": {
+            "value": ""
+        },
+        "alertEmailRecipients": {
+            "value": "data-engineering@company.com"
+        }
+    }
+}

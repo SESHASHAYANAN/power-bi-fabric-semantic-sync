@@ -1,0 +1,83 @@
+{
+  "table_name": "TBL_FABRIC_TABLE_TABLE",
+  "source": "snowflake",
+  "synced_at": "2026-01-05T19:38:44.034104",
+  "columns": [
+    {
+      "name": "COLUMN1",
+      "dataType": "VARCHAR(16777216)"
+    },
+    {
+      "name": "COLUMN2",
+      "dataType": "VARCHAR(16777216)"
+    },
+    {
+      "name": "COLUMN3",
+      "dataType": "VARCHAR(16777216)"
+    },
+    {
+      "name": "COLUMN4",
+      "dataType": "VARCHAR(16777216)"
+    },
+    {
+      "name": "COLUMN5",
+      "dataType": "VARCHAR(16777216)"
+    },
+    {
+      "name": "COLUMN6",
+      "dataType": "VARCHAR(16777216)"
+    },
+    {
+      "name": "COLUMN7",
+      "dataType": "VARCHAR(16777216)"
+    }
+  ],
+  "row_count": 5,
+  "data": [
+    {
+      "COLUMN1": "101",
+      "COLUMN2": "Rajesh Kumar",
+      "COLUMN3": "Engineering",
+      "COLUMN4": "85000",
+      "COLUMN5": "2023-05-15 00:00:00",
+      "COLUMN6": "Yes",
+      "COLUMN7": "rajesh.kumar@company.com"
+    },
+    {
+      "COLUMN1": "102",
+      "COLUMN2": "Priya Sharma",
+      "COLUMN3": "Marketing",
+      "COLUMN4": "65000",
+      "COLUMN5": "2024-02-20 00:00:00",
+      "COLUMN6": "Yes",
+      "COLUMN7": "priya.sharma@company.com"
+    },
+    {
+      "COLUMN1": "103",
+      "COLUMN2": "Amit Patel",
+      "COLUMN3": "Sales",
+      "COLUMN4": "72000",
+      "COLUMN5": "2023-11-10 00:00:00",
+      "COLUMN6": "Yes",
+      "COLUMN7": "amit.patel@company.com"
+    },
+    {
+      "COLUMN1": "104",
+      "COLUMN2": "Sneha Reddy",
+      "COLUMN3": "Engineering",
+      "COLUMN4": "90000",
+      "COLUMN5": "2022-08-05 00:00:00",
+      "COLUMN6": "Yes",
+      "COLUMN7": "sneha.reddy@company.com"
+    },
+    {
+      "COLUMN1": "105",
+      "COLUMN2": "Vikram Singh",
+      "COLUMN3": "HR",
+      "COLUMN4": "60000",
+      "COLUMN5": "2025-01-15 00:00:00",
+      "COLUMN6": "Yes",
+      "COLUMN7": "vikram.singh@company.com"
+    }
+  ]
+}

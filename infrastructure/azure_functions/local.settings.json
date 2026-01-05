@@ -1,0 +1,32 @@
+{
+    "IsEncrypted": false,
+    "Values": {
+        "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+        "FUNCTIONS_WORKER_RUNTIME": "python",
+        "APPINSIGHTS_INSTRUMENTATIONKEY": "<your-application-insights-key>",
+        "APPLICATIONINSIGHTS_CONNECTION_STRING": "<your-application-insights-connection-string>",
+        "FABRIC_TENANT_ID": "<your-fabric-tenant-id>",
+        "FABRIC_CLIENT_ID": "<your-fabric-client-id>",
+        "FABRIC_CLIENT_SECRET": "<your-fabric-client-secret>",
+        "FABRIC_WORKSPACE_ID": "<your-fabric-workspace-id>",
+        "SNOWFLAKE_ACCOUNT": "<your-snowflake-account>",
+        "SNOWFLAKE_USER": "<your-snowflake-user>",
+        "SNOWFLAKE_PASSWORD": "<your-snowflake-password>",
+        "SNOWFLAKE_WAREHOUSE": "SEMANTIC_SYNC_WH",
+        "SNOWFLAKE_DATABASE": "ANALYTICS_DB",
+        "SNOWFLAKE_SCHEMA": "SEMANTIC_LAYER",
+        "REDIS_CONNECTION_STRING": "<your-redis-connection-string>",
+        "REDIS_HOST": "<your-redis-host>",
+        "REDIS_PORT": "6380",
+        "REDIS_PASSWORD": "<your-redis-password>",
+        "REDIS_SSL": "true",
+        "AZURE_STORAGE_CONNECTION_STRING": "<your-storage-connection-string>",
+        "SYNC_LOGS_CONTAINER": "sync-logs",
+        "SLACK_WEBHOOK_URL": "<your-slack-webhook-url>",
+        "ALERT_EMAIL_RECIPIENTS": "data-engineering@company.com,devops@company.com",
+        "SYNC_INTERVAL_HOURS": "1",
+        "HEALTH_CHECK_INTERVAL_MINUTES": "15",
+        "MAX_RETRY_ATTEMPTS": "3",
+        "SYNC_TIMEOUT_MINUTES": "30"
+    }
+}

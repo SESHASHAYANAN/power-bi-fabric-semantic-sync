@@ -1,0 +1,106 @@
+{
+  "name": "TBL_FABRIC__SALES",
+  "displayName": "Tbl Fabric  Sales",
+  "description": "Synced from Snowflake on 2026-01-05T16:14:32.705308",
+  "tables": [
+    {
+      "name": "TBL_FABRIC__SALES",
+      "displayName": "Tbl Fabric  Sales",
+      "columns": [
+        {
+          "name": "COL_ID",
+          "displayName": "Col Id",
+          "dataType": "String",
+          "isHidden": false,
+          "description": "Column from Snowflake table TBL_FABRIC__SALES"
+        },
+        {
+          "name": "COL_VALUE",
+          "displayName": "Col Value",
+          "dataType": "String",
+          "isHidden": false,
+          "description": "Column from Snowflake table TBL_FABRIC__SALES"
+        },
+        {
+          "name": "CREATED_AT",
+          "displayName": "Created At",
+          "dataType": "DateTime",
+          "isHidden": false,
+          "description": "Column from Snowflake table TBL_FABRIC__SALES"
+        }
+      ],
+      "measures": [],
+      "partitions": [
+        {
+          "name": "Partition1",
+          "mode": "import"
+        }
+      ]
+    }
+  ],
+  "relationships": [],
+  "annotations": [
+    {
+      "name": "SyncedFromSnowflake",
+      "value": "2026-01-05T16:14:32.705308"
+    }
+  ],
+  "sampleData": [
+    {
+      "COL_ID": "Sample_COL_ID_1",
+      "COL_VALUE": "Sample_COL_VALUE_1",
+      "CREATED_AT": "2026-01-01 12:00:00"
+    },
+    {
+      "COL_ID": "Sample_COL_ID_2",
+      "COL_VALUE": "Sample_COL_VALUE_2",
+      "CREATED_AT": "2026-01-02 12:00:00"
+    },
+    {
+      "COL_ID": "Sample_COL_ID_3",
+      "COL_VALUE": "Sample_COL_VALUE_3",
+      "CREATED_AT": "2026-01-03 12:00:00"
+    },
+    {
+      "COL_ID": "Sample_COL_ID_4",
+      "COL_VALUE": "Sample_COL_VALUE_4",
+      "CREATED_AT": "2026-01-04 12:00:00"
+    },
+    {
+      "COL_ID": "Sample_COL_ID_5",
+      "COL_VALUE": "Sample_COL_VALUE_5",
+      "CREATED_AT": "2026-01-05 12:00:00"
+    },
+    {
+      "COL_ID": "Sample_COL_ID_6",
+      "COL_VALUE": "Sample_COL_VALUE_6",
+      "CREATED_AT": "2026-01-06 12:00:00"
+    },
+    {
+      "COL_ID": "Sample_COL_ID_7",
+      "COL_VALUE": "Sample_COL_VALUE_7",
+      "CREATED_AT": "2026-01-07 12:00:00"
+    },
+    {
+      "COL_ID": "Sample_COL_ID_8",
+      "COL_VALUE": "Sample_COL_VALUE_8",
+      "CREATED_AT": "2026-01-08 12:00:00"
+    },
+    {
+      "COL_ID": "Sample_COL_ID_9",
+      "COL_VALUE": "Sample_COL_VALUE_9",
+      "CREATED_AT": "2026-01-09 12:00:00"
+    },
+    {
+      "COL_ID": "Sample_COL_ID_10",
+      "COL_VALUE": "Sample_COL_VALUE_10",
+      "CREATED_AT": "2026-01-10 12:00:00"
+    }
+  ],
+  "rowCount": 10,
+  "syncMetadata": {
+    "source": "snowflake",
+    "syncedAt": "2026-01-05T16:14:32.705308",
+    "rowCount": 10
+  }
+}

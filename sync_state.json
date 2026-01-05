@@ -1,0 +1,1841 @@
+{
+  "last_full_sync": "2026-01-05T16:14:32.799294",
+  "synced_files": {
+    "test_employees.csv": "f12a371e01e6578f06387bb3c2a2158e",
+    "UPLOADED_TEST_EMPLOYEES.json": "efa528cd6a1fd5ad4abfcda58fc935de"
+  },
+  "fabric_models": {
+    "UPLOADED_TEST_EMPLOYEES": "2026-01-05T16:14:32.769791",
+    "TBL_FABRIC_DAY_DAY": "2026-01-05T16:14:32.518411",
+    "TBL_FABRIC_SALES_SALES": "2026-01-05T16:14:32.609613",
+    "TBL_FABRIC_TABLE_TABLE": "2026-01-05T16:14:32.649936",
+    "TBL_FABRIC__DAY": "2026-01-05T16:14:32.681296",
+    "TBL_FABRIC__SALES": "2026-01-05T16:14:32.708795",
+    "TBL_FABRIC__TABLE": "2026-01-05T16:14:32.739606",
+    "TBL_FABRIC_INDUSTRY_INDUSTRY": "2026-01-05T16:14:32.545848",
+    "TBL_FABRIC_NEWREP_NEWREP": "2026-01-05T16:14:32.573642"
+  },
+  "snowflake_tables": {
+    "UPLOADED_TEST_EMPLOYEES": "2026-01-05T15:39:32.212851"
+  },
+  "sync_log": [
+    {
+      "timestamp": "2026-01-04T22:50:32.030569",
+      "type": "FULL_SYNC_START",
+      "message": "Starting full bidirectional sync",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T22:50:32.035509",
+      "type": "SYNC_FILE_START",
+      "message": "Syncing file: test_employees.csv",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T22:50:33.555299",
+      "type": "SNOWFLAKE_CREATE",
+      "message": "Created table: UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T22:50:35.747349",
+      "type": "FABRIC_SYNC",
+      "message": "Staged model: UPLOADED_TEST_EMPLOYEES (Fabric has 3 models)",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T22:50:35.753607",
+      "type": "SYNC_FILE_COMPLETE",
+      "message": "File synced: test_employees.csv -> UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T22:50:35.757404",
+      "type": "SYNC_FILE_START",
+      "message": "Syncing file: UPLOADED_TEST_EMPLOYEES.json",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T22:50:38.248754",
+      "type": "SNOWFLAKE_CREATE",
+      "message": "Created table: UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T22:50:39.842319",
+      "type": "FABRIC_SYNC",
+      "message": "Staged model: UPLOADED_TEST_EMPLOYEES (Fabric has 3 models)",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T22:50:39.871548",
+      "type": "SYNC_FILE_COMPLETE",
+      "message": "File synced: UPLOADED_TEST_EMPLOYEES.json -> UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T22:50:42.036046",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T22:50:42.045364",
+      "type": "FULL_SYNC_COMPLETE",
+      "message": "Sync complete: Staged=2, F2S=0, S2F=1",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T22:51:19.736611",
+      "type": "FULL_SYNC_START",
+      "message": "Starting full bidirectional sync",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T22:51:19.736611",
+      "type": "REALTIME_START",
+      "message": "Real-time sync started (interval: 60s)",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T22:51:23.292269",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T22:51:23.297733",
+      "type": "FULL_SYNC_COMPLETE",
+      "message": "Sync complete: Staged=0, F2S=0, S2F=1",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T22:52:23.317174",
+      "type": "FULL_SYNC_START",
+      "message": "Starting full bidirectional sync",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T22:52:26.783802",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T22:52:26.797508",
+      "type": "FULL_SYNC_COMPLETE",
+      "message": "Sync complete: Staged=0, F2S=0, S2F=1",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T22:53:12.482533",
+      "type": "FULL_SYNC_START",
+      "message": "Starting full bidirectional sync",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T22:53:14.811852",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T22:53:14.817197",
+      "type": "FULL_SYNC_COMPLETE",
+      "message": "Sync complete: Staged=0, F2S=0, S2F=1",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T22:53:26.812438",
+      "type": "FULL_SYNC_START",
+      "message": "Starting full bidirectional sync",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T22:53:29.561596",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T22:53:29.566806",
+      "type": "FULL_SYNC_COMPLETE",
+      "message": "Sync complete: Staged=0, F2S=0, S2F=1",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T22:54:29.592429",
+      "type": "FULL_SYNC_START",
+      "message": "Starting full bidirectional sync",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T22:54:32.784992",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T22:54:32.794585",
+      "type": "FULL_SYNC_COMPLETE",
+      "message": "Sync complete: Staged=0, F2S=0, S2F=1",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T22:55:32.806654",
+      "type": "FULL_SYNC_START",
+      "message": "Starting full bidirectional sync",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T22:55:35.655375",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T22:55:35.662011",
+      "type": "FULL_SYNC_COMPLETE",
+      "message": "Sync complete: Staged=0, F2S=0, S2F=1",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T22:56:35.670838",
+      "type": "FULL_SYNC_START",
+      "message": "Starting full bidirectional sync",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T22:56:40.360603",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T22:56:40.366526",
+      "type": "FULL_SYNC_COMPLETE",
+      "message": "Sync complete: Staged=0, F2S=0, S2F=1",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T22:57:40.374679",
+      "type": "FULL_SYNC_START",
+      "message": "Starting full bidirectional sync",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T22:57:43.187421",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T22:57:43.193168",
+      "type": "FULL_SYNC_COMPLETE",
+      "message": "Sync complete: Staged=0, F2S=0, S2F=1",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T22:58:43.211093",
+      "type": "FULL_SYNC_START",
+      "message": "Starting full bidirectional sync",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T22:58:46.857415",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T22:58:46.865735",
+      "type": "FULL_SYNC_COMPLETE",
+      "message": "Sync complete: Staged=0, F2S=0, S2F=1",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T22:59:46.874748",
+      "type": "FULL_SYNC_START",
+      "message": "Starting full bidirectional sync",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T22:59:50.273009",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T22:59:50.280847",
+      "type": "FULL_SYNC_COMPLETE",
+      "message": "Sync complete: Staged=0, F2S=0, S2F=1",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:00:50.285345",
+      "type": "FULL_SYNC_START",
+      "message": "Starting full bidirectional sync",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:00:54.091598",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:00:54.098182",
+      "type": "FULL_SYNC_COMPLETE",
+      "message": "Sync complete: Staged=0, F2S=0, S2F=1",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:01:54.114029",
+      "type": "FULL_SYNC_START",
+      "message": "Starting full bidirectional sync",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:01:57.256259",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:01:57.266112",
+      "type": "FULL_SYNC_COMPLETE",
+      "message": "Sync complete: Staged=0, F2S=0, S2F=1",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:02:57.273853",
+      "type": "FULL_SYNC_START",
+      "message": "Starting full bidirectional sync",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:03:00.148854",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:03:00.155846",
+      "type": "FULL_SYNC_COMPLETE",
+      "message": "Sync complete: Staged=0, F2S=0, S2F=1",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:04:00.175547",
+      "type": "FULL_SYNC_START",
+      "message": "Starting full bidirectional sync",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:04:02.887724",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:04:02.898845",
+      "type": "FULL_SYNC_COMPLETE",
+      "message": "Sync complete: Staged=0, F2S=0, S2F=1",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:05:02.911999",
+      "type": "FULL_SYNC_START",
+      "message": "Starting full bidirectional sync",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:05:06.012215",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:05:06.022095",
+      "type": "FULL_SYNC_COMPLETE",
+      "message": "Sync complete: Staged=0, F2S=0, S2F=1",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:06:06.041225",
+      "type": "FULL_SYNC_START",
+      "message": "Starting full bidirectional sync",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:06:10.010131",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:06:10.020307",
+      "type": "FULL_SYNC_COMPLETE",
+      "message": "Sync complete: Staged=0, F2S=0, S2F=1",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:07:10.035745",
+      "type": "FULL_SYNC_START",
+      "message": "Starting full bidirectional sync",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:07:12.952076",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:07:12.961308",
+      "type": "FULL_SYNC_COMPLETE",
+      "message": "Sync complete: Staged=0, F2S=0, S2F=1",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:08:12.978431",
+      "type": "FULL_SYNC_START",
+      "message": "Starting full bidirectional sync",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:08:15.562468",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:08:15.570172",
+      "type": "FULL_SYNC_COMPLETE",
+      "message": "Sync complete: Staged=0, F2S=0, S2F=1",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:21:36.486994",
+      "type": "FULL_SYNC_START",
+      "message": "Starting full bidirectional sync",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:21:41.672782",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC_DAY_DAY",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:21:41.684136",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC_SALES_SALES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:21:41.691996",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC_TABLE_TABLE",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:21:41.703349",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC__DAY",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:21:41.712456",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC__SALES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:21:41.722549",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC__TABLE",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:21:41.737386",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:21:41.743705",
+      "type": "FULL_SYNC_COMPLETE",
+      "message": "Sync complete: Staged=0, F2S=0, S2F=7",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:23:11.018876",
+      "type": "FULL_SYNC_START",
+      "message": "Starting full bidirectional sync",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:23:11.018876",
+      "type": "REALTIME_START",
+      "message": "Real-time sync started (interval: 60s)",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:23:15.722176",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC_DAY_DAY",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:23:15.738793",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC_SALES_SALES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:23:15.753755",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC_TABLE_TABLE",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:23:15.772600",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC__DAY",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:23:15.786082",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC__SALES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:23:15.795948",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC__TABLE",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:23:15.807475",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:23:15.816539",
+      "type": "FULL_SYNC_COMPLETE",
+      "message": "Sync complete: Staged=0, F2S=0, S2F=7",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:24:15.824593",
+      "type": "FULL_SYNC_START",
+      "message": "Starting full bidirectional sync",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:24:20.182040",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC_DAY_DAY",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:24:20.198509",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC_SALES_SALES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:24:20.211684",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC_TABLE_TABLE",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:24:20.225063",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC__DAY",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:24:20.240260",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC__SALES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:24:20.252586",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC__TABLE",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:24:20.265903",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:24:20.273645",
+      "type": "FULL_SYNC_COMPLETE",
+      "message": "Sync complete: Staged=0, F2S=0, S2F=7",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:25:20.282850",
+      "type": "FULL_SYNC_START",
+      "message": "Starting full bidirectional sync",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:25:25.471676",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC_DAY_DAY",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:25:25.489922",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC_SALES_SALES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:25:25.520976",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC_TABLE_TABLE",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:25:25.538229",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC__DAY",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:25:25.549464",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC__SALES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:25:25.616147",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC__TABLE",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:25:25.702492",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:25:25.749197",
+      "type": "FULL_SYNC_COMPLETE",
+      "message": "Sync complete: Staged=0, F2S=0, S2F=7",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:26:25.778895",
+      "type": "FULL_SYNC_START",
+      "message": "Starting full bidirectional sync",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:26:31.150775",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC_DAY_DAY",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:26:31.163722",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC_SALES_SALES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:26:31.187724",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC_TABLE_TABLE",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:26:31.202118",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC__DAY",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:26:31.216995",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC__SALES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:26:31.231432",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC__TABLE",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:26:31.245347",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:26:31.256208",
+      "type": "FULL_SYNC_COMPLETE",
+      "message": "Sync complete: Staged=0, F2S=0, S2F=7",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:27:13.155447",
+      "type": "FULL_SYNC_START",
+      "message": "Starting full bidirectional sync",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:27:18.769536",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC_DAY_DAY",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:27:18.790580",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC_SALES_SALES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:27:18.811281",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC_TABLE_TABLE",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:27:18.830429",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC__DAY",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:27:18.844627",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC__SALES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:27:18.863090",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC__TABLE",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:27:18.877922",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:27:18.890361",
+      "type": "FULL_SYNC_COMPLETE",
+      "message": "Sync complete: Staged=0, F2S=0, S2F=7",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:27:31.274781",
+      "type": "FULL_SYNC_START",
+      "message": "Starting full bidirectional sync",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:27:36.787541",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC_DAY_DAY",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:27:36.807725",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC_SALES_SALES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:27:36.836383",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC_TABLE_TABLE",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:27:36.858316",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC__DAY",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:27:36.875756",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC__SALES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:27:36.899877",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC__TABLE",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:27:36.919270",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:27:36.944469",
+      "type": "FULL_SYNC_COMPLETE",
+      "message": "Sync complete: Staged=0, F2S=0, S2F=7",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:28:36.971407",
+      "type": "FULL_SYNC_START",
+      "message": "Starting full bidirectional sync",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:45:09.892092",
+      "type": "FULL_SYNC_START",
+      "message": "Starting full bidirectional sync",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:45:15.449748",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC_DAY_DAY",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:45:15.481483",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC_SALES_SALES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:45:15.534214",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC_TABLE_TABLE",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:45:15.554697",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC__DAY",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:45:15.580401",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC__SALES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:45:15.609846",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC__TABLE",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:45:15.632795",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-04T23:45:15.650533",
+      "type": "FULL_SYNC_COMPLETE",
+      "message": "Sync complete: Staged=0, F2S=0, S2F=7",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:37:30.362767",
+      "type": "FULL_SYNC_START",
+      "message": "Starting full bidirectional sync",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:37:30.362767",
+      "type": "REALTIME_START",
+      "message": "Real-time sync started (interval: 60s)",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:37:32.408694",
+      "type": "SYNC_FILE_START",
+      "message": "Syncing file: test_employees.csv",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:37:35.292314",
+      "type": "SNOWFLAKE_CREATE",
+      "message": "Created table: UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:37:38.108778",
+      "type": "FABRIC_SYNC",
+      "message": "Staged model: UPLOADED_TEST_EMPLOYEES (Fabric has 5 models)",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:37:38.121283",
+      "type": "SYNC_FILE_COMPLETE",
+      "message": "File synced: test_employees.csv -> UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:37:38.606150",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC_DAY_DAY",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:37:38.625031",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC_INDUSTRY_INDUSTRY",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:37:38.640941",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC_NEWREP_NEWREP",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:37:38.657052",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC_SALES_SALES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:37:38.674932",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC_TABLE_TABLE",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:37:38.693230",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC__DAY",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:37:38.715847",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC__SALES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:37:38.731505",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC__TABLE",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:37:38.751064",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:37:38.762182",
+      "type": "FULL_SYNC_COMPLETE",
+      "message": "Sync complete: Staged=0, F2S=0, S2F=9",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:37:39.897239",
+      "type": "SYNC_FILE_START",
+      "message": "Syncing file: UPLOADED_TEST_EMPLOYEES.json",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:37:41.459971",
+      "type": "SNOWFLAKE_CREATE",
+      "message": "Created table: UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:37:44.362599",
+      "type": "FABRIC_SYNC",
+      "message": "Staged model: UPLOADED_TEST_EMPLOYEES (Fabric has 5 models)",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:37:44.411001",
+      "type": "SYNC_FILE_COMPLETE",
+      "message": "File synced: UPLOADED_TEST_EMPLOYEES.json -> UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:37:46.139766",
+      "type": "SYNC_FILE_START",
+      "message": "Syncing file: UPLOADED_TEST_EMPLOYEES.json",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:37:48.098701",
+      "type": "SNOWFLAKE_CREATE",
+      "message": "Created table: UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:37:50.068494",
+      "type": "FABRIC_SYNC",
+      "message": "Staged model: UPLOADED_TEST_EMPLOYEES (Fabric has 5 models)",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:37:50.109697",
+      "type": "SYNC_FILE_COMPLETE",
+      "message": "File synced: UPLOADED_TEST_EMPLOYEES.json -> UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:37:51.808896",
+      "type": "SYNC_FILE_START",
+      "message": "Syncing file: UPLOADED_TEST_EMPLOYEES.json",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:37:53.132295",
+      "type": "SNOWFLAKE_CREATE",
+      "message": "Created table: UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:37:56.059227",
+      "type": "FABRIC_SYNC",
+      "message": "Staged model: UPLOADED_TEST_EMPLOYEES (Fabric has 5 models)",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:37:56.092475",
+      "type": "SYNC_FILE_COMPLETE",
+      "message": "File synced: UPLOADED_TEST_EMPLOYEES.json -> UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:37:57.762497",
+      "type": "SYNC_FILE_START",
+      "message": "Syncing file: UPLOADED_TEST_EMPLOYEES.json",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:37:59.227135",
+      "type": "SNOWFLAKE_CREATE",
+      "message": "Created table: UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:38:01.258391",
+      "type": "FABRIC_SYNC",
+      "message": "Staged model: UPLOADED_TEST_EMPLOYEES (Fabric has 5 models)",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:38:01.287850",
+      "type": "SYNC_FILE_COMPLETE",
+      "message": "File synced: UPLOADED_TEST_EMPLOYEES.json -> UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:38:03.016592",
+      "type": "SYNC_FILE_START",
+      "message": "Syncing file: UPLOADED_TEST_EMPLOYEES.json",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:38:05.779834",
+      "type": "SNOWFLAKE_CREATE",
+      "message": "Created table: UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:38:10.102167",
+      "type": "FABRIC_SYNC",
+      "message": "Staged model: UPLOADED_TEST_EMPLOYEES (Fabric has 5 models)",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:38:10.146684",
+      "type": "SYNC_FILE_COMPLETE",
+      "message": "File synced: UPLOADED_TEST_EMPLOYEES.json -> UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:38:11.610365",
+      "type": "SYNC_FILE_START",
+      "message": "Syncing file: UPLOADED_TEST_EMPLOYEES.json",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:38:13.330556",
+      "type": "SNOWFLAKE_CREATE",
+      "message": "Created table: UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:38:15.520823",
+      "type": "FABRIC_SYNC",
+      "message": "Staged model: UPLOADED_TEST_EMPLOYEES (Fabric has 5 models)",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:38:15.556854",
+      "type": "SYNC_FILE_COMPLETE",
+      "message": "File synced: UPLOADED_TEST_EMPLOYEES.json -> UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:38:17.279594",
+      "type": "SYNC_FILE_START",
+      "message": "Syncing file: UPLOADED_TEST_EMPLOYEES.json",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:38:18.466732",
+      "type": "SNOWFLAKE_CREATE",
+      "message": "Created table: UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:38:21.372570",
+      "type": "FABRIC_SYNC",
+      "message": "Staged model: UPLOADED_TEST_EMPLOYEES (Fabric has 6 models)",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:38:21.407120",
+      "type": "SYNC_FILE_COMPLETE",
+      "message": "File synced: UPLOADED_TEST_EMPLOYEES.json -> UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:38:23.097047",
+      "type": "SYNC_FILE_START",
+      "message": "Syncing file: UPLOADED_TEST_EMPLOYEES.json",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:38:24.218916",
+      "type": "SNOWFLAKE_CREATE",
+      "message": "Created table: UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:38:26.925643",
+      "type": "FABRIC_SYNC",
+      "message": "Staged model: UPLOADED_TEST_EMPLOYEES (Fabric has 6 models)",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:38:26.953249",
+      "type": "SYNC_FILE_COMPLETE",
+      "message": "File synced: UPLOADED_TEST_EMPLOYEES.json -> UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:38:28.658500",
+      "type": "SYNC_FILE_START",
+      "message": "Syncing file: UPLOADED_TEST_EMPLOYEES.json",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:38:30.389782",
+      "type": "SNOWFLAKE_CREATE",
+      "message": "Created table: UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:38:32.542044",
+      "type": "FABRIC_SYNC",
+      "message": "Staged model: UPLOADED_TEST_EMPLOYEES (Fabric has 6 models)",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:38:32.569202",
+      "type": "SYNC_FILE_COMPLETE",
+      "message": "File synced: UPLOADED_TEST_EMPLOYEES.json -> UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:38:34.076352",
+      "type": "SYNC_FILE_START",
+      "message": "Syncing file: UPLOADED_TEST_EMPLOYEES.json",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:38:36.078141",
+      "type": "SNOWFLAKE_CREATE",
+      "message": "Created table: UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:38:38.257509",
+      "type": "FABRIC_SYNC",
+      "message": "Staged model: UPLOADED_TEST_EMPLOYEES (Fabric has 6 models)",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:38:38.294925",
+      "type": "SYNC_FILE_COMPLETE",
+      "message": "File synced: UPLOADED_TEST_EMPLOYEES.json -> UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:38:38.781403",
+      "type": "FULL_SYNC_START",
+      "message": "Starting full bidirectional sync",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:38:39.947384",
+      "type": "SYNC_FILE_START",
+      "message": "Syncing file: UPLOADED_TEST_EMPLOYEES.json",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:38:42.567760",
+      "type": "SNOWFLAKE_CREATE",
+      "message": "Created table: UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:38:44.445878",
+      "type": "FABRIC_SYNC",
+      "message": "Staged model: UPLOADED_TEST_EMPLOYEES (Fabric has 6 models)",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:38:44.476591",
+      "type": "SYNC_FILE_COMPLETE",
+      "message": "File synced: UPLOADED_TEST_EMPLOYEES.json -> UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:38:45.022901",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC_DAY_DAY",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:38:45.048098",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC_INDUSTRY_INDUSTRY",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:38:45.064296",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC_NEWREP_NEWREP",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:38:45.080730",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC_SALES_SALES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:38:45.093285",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC_TABLE_TABLE",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:38:45.116675",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC__DAY",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:38:45.132180",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC__SALES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:38:45.143234",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC__TABLE",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:38:45.158481",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:38:45.170915",
+      "type": "FULL_SYNC_COMPLETE",
+      "message": "Sync complete: Staged=0, F2S=0, S2F=9",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:38:46.230668",
+      "type": "SYNC_FILE_START",
+      "message": "Syncing file: UPLOADED_TEST_EMPLOYEES.json",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:38:47.497243",
+      "type": "SNOWFLAKE_CREATE",
+      "message": "Created table: UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:38:49.246194",
+      "type": "FABRIC_SYNC",
+      "message": "Staged model: UPLOADED_TEST_EMPLOYEES (Fabric has 6 models)",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:38:49.275550",
+      "type": "SYNC_FILE_COMPLETE",
+      "message": "File synced: UPLOADED_TEST_EMPLOYEES.json -> UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:38:50.990573",
+      "type": "SYNC_FILE_START",
+      "message": "Syncing file: UPLOADED_TEST_EMPLOYEES.json",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:38:53.079502",
+      "type": "SNOWFLAKE_CREATE",
+      "message": "Created table: UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:38:54.839137",
+      "type": "FABRIC_SYNC",
+      "message": "Staged model: UPLOADED_TEST_EMPLOYEES (Fabric has 6 models)",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:38:54.868387",
+      "type": "SYNC_FILE_COMPLETE",
+      "message": "File synced: UPLOADED_TEST_EMPLOYEES.json -> UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:38:56.573263",
+      "type": "SYNC_FILE_START",
+      "message": "Syncing file: UPLOADED_TEST_EMPLOYEES.json",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:38:58.080445",
+      "type": "SNOWFLAKE_CREATE",
+      "message": "Created table: UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:38:59.835008",
+      "type": "FABRIC_SYNC",
+      "message": "Staged model: UPLOADED_TEST_EMPLOYEES (Fabric has 6 models)",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:38:59.864836",
+      "type": "SYNC_FILE_COMPLETE",
+      "message": "File synced: UPLOADED_TEST_EMPLOYEES.json -> UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:39:01.582103",
+      "type": "SYNC_FILE_START",
+      "message": "Syncing file: UPLOADED_TEST_EMPLOYEES.json",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:39:03.336542",
+      "type": "SNOWFLAKE_CREATE",
+      "message": "Created table: UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:39:05.141992",
+      "type": "FABRIC_SYNC",
+      "message": "Staged model: UPLOADED_TEST_EMPLOYEES (Fabric has 6 models)",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:39:05.184996",
+      "type": "SYNC_FILE_COMPLETE",
+      "message": "File synced: UPLOADED_TEST_EMPLOYEES.json -> UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:39:06.868131",
+      "type": "SYNC_FILE_START",
+      "message": "Syncing file: UPLOADED_TEST_EMPLOYEES.json",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:39:08.602294",
+      "type": "SNOWFLAKE_CREATE",
+      "message": "Created table: UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:39:12.856763",
+      "type": "FABRIC_SYNC",
+      "message": "Staged model: UPLOADED_TEST_EMPLOYEES (Fabric has 6 models)",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:39:12.889324",
+      "type": "SYNC_FILE_COMPLETE",
+      "message": "File synced: UPLOADED_TEST_EMPLOYEES.json -> UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:39:13.974378",
+      "type": "SYNC_FILE_START",
+      "message": "Syncing file: UPLOADED_TEST_EMPLOYEES.json",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:39:16.080811",
+      "type": "SNOWFLAKE_CREATE",
+      "message": "Created table: UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:39:17.960288",
+      "type": "FABRIC_SYNC",
+      "message": "Staged model: UPLOADED_TEST_EMPLOYEES (Fabric has 6 models)",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:39:17.998710",
+      "type": "SYNC_FILE_COMPLETE",
+      "message": "File synced: UPLOADED_TEST_EMPLOYEES.json -> UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:39:19.551368",
+      "type": "SYNC_FILE_START",
+      "message": "Syncing file: UPLOADED_TEST_EMPLOYEES.json",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:39:21.448038",
+      "type": "SNOWFLAKE_CREATE",
+      "message": "Created table: UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:39:23.246596",
+      "type": "FABRIC_SYNC",
+      "message": "Staged model: UPLOADED_TEST_EMPLOYEES (Fabric has 6 models)",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:39:23.271923",
+      "type": "SYNC_FILE_COMPLETE",
+      "message": "File synced: UPLOADED_TEST_EMPLOYEES.json -> UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:39:25.011576",
+      "type": "SYNC_FILE_START",
+      "message": "Syncing file: UPLOADED_TEST_EMPLOYEES.json",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:39:26.004568",
+      "type": "SNOWFLAKE_CREATE",
+      "message": "Created table: UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:39:27.935813",
+      "type": "FABRIC_SYNC",
+      "message": "Staged model: UPLOADED_TEST_EMPLOYEES (Fabric has 6 models)",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:39:27.964879",
+      "type": "SYNC_FILE_COMPLETE",
+      "message": "File synced: UPLOADED_TEST_EMPLOYEES.json -> UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:39:29.515924",
+      "type": "SYNC_FILE_START",
+      "message": "Syncing file: UPLOADED_TEST_EMPLOYEES.json",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:39:30.574842",
+      "type": "SNOWFLAKE_CREATE",
+      "message": "Created table: UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:39:32.416228",
+      "type": "FABRIC_SYNC",
+      "message": "Staged model: UPLOADED_TEST_EMPLOYEES (Fabric has 6 models)",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:39:32.442584",
+      "type": "SYNC_FILE_COMPLETE",
+      "message": "File synced: UPLOADED_TEST_EMPLOYEES.json -> UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:49:32.029887",
+      "type": "FULL_SYNC_START",
+      "message": "Starting full bidirectional sync",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:49:32.029887",
+      "type": "REALTIME_START",
+      "message": "Real-time sync started (interval: 60s)",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:49:37.922086",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC_DAY_DAY",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:49:37.936056",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC_INDUSTRY_INDUSTRY",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:49:37.950865",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC_NEWREP_NEWREP",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:49:37.964499",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC_SALES_SALES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:49:37.975149",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC_TABLE_TABLE",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:49:37.990566",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC__DAY",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:49:38.005768",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC__SALES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:49:38.019442",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC__TABLE",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:49:38.033358",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:49:38.045079",
+      "type": "FULL_SYNC_COMPLETE",
+      "message": "Sync complete: Staged=0, F2S=0, S2F=9",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:50:49.788355",
+      "type": "FULL_SYNC_START",
+      "message": "Starting full bidirectional sync",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:50:56.110758",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC_DAY_DAY",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:50:56.146451",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC_INDUSTRY_INDUSTRY",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:50:56.178266",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC_NEWREP_NEWREP",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:50:56.212176",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC_SALES_SALES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:50:56.273444",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC_TABLE_TABLE",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:50:56.320442",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC__DAY",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:50:56.367233",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC__SALES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:50:56.420314",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC__TABLE",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:50:56.466045",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T15:50:56.516618",
+      "type": "FULL_SYNC_COMPLETE",
+      "message": "Sync complete: Staged=0, F2S=0, S2F=9",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T16:02:38.387759",
+      "type": "FULL_SYNC_START",
+      "message": "Starting full bidirectional sync",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T16:02:56.680484",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC_DAY_DAY",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T16:02:56.701398",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC_INDUSTRY_INDUSTRY",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T16:02:56.724427",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC_NEWREP_NEWREP",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T16:02:56.745601",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC_SALES_SALES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T16:02:56.765999",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC_TABLE_TABLE",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T16:02:56.800664",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC__DAY",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T16:02:56.824066",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC__SALES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T16:02:56.845637",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC__TABLE",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T16:02:56.876899",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T16:02:56.914317",
+      "type": "FULL_SYNC_COMPLETE",
+      "message": "Sync complete: Staged=0, F2S=0, S2F=9",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T16:12:29.875912",
+      "type": "FULL_SYNC_START",
+      "message": "Starting full bidirectional sync",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T16:12:35.296511",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC_DAY_DAY",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T16:12:35.331833",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC_INDUSTRY_INDUSTRY",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T16:12:35.370811",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC_NEWREP_NEWREP",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T16:12:35.406887",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC_SALES_SALES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T16:12:35.440634",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC_TABLE_TABLE",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T16:12:35.483677",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC__DAY",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T16:12:35.513758",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC__SALES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T16:12:35.550690",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC__TABLE",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T16:12:35.588705",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T16:12:35.619765",
+      "type": "FULL_SYNC_COMPLETE",
+      "message": "Sync complete: Staged=0, F2S=0, S2F=9",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T16:14:27.192161",
+      "type": "FULL_SYNC_START",
+      "message": "Starting full bidirectional sync",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T16:14:32.531294",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC_DAY_DAY",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T16:14:32.557314",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC_INDUSTRY_INDUSTRY",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T16:14:32.593494",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC_NEWREP_NEWREP",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T16:14:32.629066",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC_SALES_SALES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T16:14:32.661805",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC_TABLE_TABLE",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T16:14:32.690343",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC__DAY",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T16:14:32.720699",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC__SALES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T16:14:32.751126",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: TBL_FABRIC__TABLE",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T16:14:32.781595",
+      "type": "SNOWFLAKE_TO_FABRIC",
+      "message": "Synced table to Fabric: UPLOADED_TEST_EMPLOYEES",
+      "status": "INFO"
+    },
+    {
+      "timestamp": "2026-01-05T16:14:32.809635",
+      "type": "FULL_SYNC_COMPLETE",
+      "message": "Sync complete: Staged=0, F2S=0, S2F=9",
+      "status": "INFO"
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "table_name": "UPLOADED_TEST_EMPLOYEES",
+  "source_file": "UPLOADED_TEST_EMPLOYEES.json",
+  "uploaded_at": "2026-01-05T15:39:32.224402",
+  "columns": [
+    {
+      "name": "id",
+      "displayName": "id",
+      "dataType": "int64",
+      "isHidden": false
+    },
+    {
+      "name": "name",
+      "displayName": "name",
+      "dataType": "object",
+      "isHidden": false
+    },
+    {
+      "name": "age",
+      "displayName": "age",
+      "dataType": "int64",
+      "isHidden": false
+    },
+    {
+      "name": "department",
+      "displayName": "department",
+      "dataType": "object",
+      "isHidden": false
+    },
+    {
+      "name": "salary",
+      "displayName": "salary",
+      "dataType": "float64",
+      "isHidden": false
+    }
+  ],
+  "row_count": 5,
+  "data": [
+    {
+      "id": 1,
+      "name": "Alice",
+      "age": 25,
+      "department": "Engineering",
+      "salary": 75000.5
+    },
+    {
+      "id": 2,
+      "name": "Bob",
+      "age": 30,
+      "department": "Sales",
+      "salary": 65000.0
+    },
+    {
+      "id": 3,
+      "name": "Charlie",
+      "age": 35,
+      "department": "Marketing",
+      "salary": 72000.25
+    },
+    {
+      "id": 4,
+      "name": "Diana",
+      "age": 28,
+      "department": "HR",
+      "salary": 58000.0
+    },
+    {
+      "id": 5,
+      "name": "Eve",
+      "age": 32,
+      "department": "Engineering",
+      "salary": 85000.75
+    }
+  ]
+}

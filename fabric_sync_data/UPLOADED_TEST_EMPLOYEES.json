@@ -1,0 +1,65 @@
+{
+  "table_name": "UPLOADED_TEST_EMPLOYEES",
+  "source": "snowflake",
+  "synced_at": "2026-01-05T19:38:44.037638",
+  "columns": [
+    {
+      "name": "ID",
+      "dataType": "NUMBER(19,0)"
+    },
+    {
+      "name": "NAME",
+      "dataType": "VARCHAR(4000)"
+    },
+    {
+      "name": "AGE",
+      "dataType": "NUMBER(19,0)"
+    },
+    {
+      "name": "DEPARTMENT",
+      "dataType": "VARCHAR(4000)"
+    },
+    {
+      "name": "SALARY",
+      "dataType": "FLOAT"
+    }
+  ],
+  "row_count": 5,
+  "data": [
+    {
+      "ID": 1,
+      "NAME": "Alice",
+      "AGE": 25,
+      "DEPARTMENT": "Engineering",
+      "SALARY": 75000.5
+    },
+    {
+      "ID": 2,
+      "NAME": "Bob",
+      "AGE": 30,
+      "DEPARTMENT": "Sales",
+      "SALARY": 65000.0
+    },
+    {
+      "ID": 3,
+      "NAME": "Charlie",
+      "AGE": 35,
+      "DEPARTMENT": "Marketing",
+      "SALARY": 72000.25
+    },
+    {
+      "ID": 4,
+      "NAME": "Diana",
+      "AGE": 28,
+      "DEPARTMENT": "HR",
+      "SALARY": 58000.0
+    },
+    {
+      "ID": 5,
+      "NAME": "Eve",
+      "AGE": 32,
+      "DEPARTMENT": "Engineering",
+      "SALARY": 85000.75
+    }
+  ]
+}

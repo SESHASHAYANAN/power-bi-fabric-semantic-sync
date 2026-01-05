@@ -1,0 +1,38 @@
+{
+  "table_name": "TBL_FABRIC_CONTINENT_CONTINENT",
+  "source": "snowflake",
+  "synced_at": "2026-01-05T19:38:44.018375",
+  "columns": [
+    {
+      "name": "COLUMN1",
+      "dataType": "VARCHAR(16777216)"
+    }
+  ],
+  "row_count": 8,
+  "data": [
+    {
+      "COLUMN1": "Continent"
+    },
+    {
+      "COLUMN1": "Africa"
+    },
+    {
+      "COLUMN1": "Antarctica"
+    },
+    {
+      "COLUMN1": "Asia"
+    },
+    {
+      "COLUMN1": "Australia"
+    },
+    {
+      "COLUMN1": "Europe"
+    },
+    {
+      "COLUMN1": "North America"
+    },
+    {
+      "COLUMN1": "South America"
+    }
+  ]
+}

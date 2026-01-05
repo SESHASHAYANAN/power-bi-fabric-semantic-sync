@@ -1,0 +1,759 @@
+openapi: 3.0.3
+info:
+  title: Bidirectional Sync API
+  description: |
+    Production-ready REST API for bidirectional data synchronization 
+    between Microsoft Fabric and Snowflake.
+    
+    ## Features
+    - Dual-write file uploads (atomic write to both platforms)
+    - Automatic bidirectional sync
+    - SYNC_ID-based idempotency
+    - Checksum validation
+    - Conflict resolution (last-write-wins)
+    - Full audit trail
+    
+    ## Authentication
+    API authentication is handled via API keys or OAuth tokens 
+    passed in the Authorization header.
+    
+  version: 1.0.0
+  contact:
+    name: Data Platform Team
+servers:
+  - url: http://localhost:5050/api
+    description: Development server
+  - url: https://sync.your-domain.com/api
+    description: Production server
+
+paths:
+  /health:
+    get:
+      summary: Health Check
+      description: Check the health status of the sync service and platform connections.
+      operationId: healthCheck
+      tags:
+        - Status
+      responses:
+        '200':
+          description: Service health status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    enum: [healthy, degraded, unhealthy]
+                    example: healthy
+                  timestamp:
+                    type: string
+                    format: date-time
+                  version:
+                    type: string
+                    example: "1.0.0"
+                  fabric:
+                    type: string
+                    enum: [connected, auth_failed, error]
+                  snowflake:
+                    type: string
+                    enum: [connected, connection_failed, error]
+
+  /files/upload:
+    post:
+      summary: Upload File to Both Platforms
+      description: |
+        Upload a file and create it in BOTH Fabric and Snowflake atomically.
+        
+        This is the primary endpoint for data ingestion. The file is:
+        1. Parsed and validated
+        2. Assigned a SYNC_ID for idempotency
+        3. Written to both platforms in parallel
+        4. Validated for row count and checksum match
+        5. Marked as synced or queued for retry
+        
+        Supported formats: CSV, JSON, XLSX, XLS
+        Maximum size: 100MB
+        
+      operationId: uploadFile
+      tags:
+        - Files
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: File to upload
+                user_id:
+                  type: string
+                  description: ID of user performing upload
+                  default: api_user
+          application/json:
+            schema:
+              type: object
+              required:
+                - file
+                - filename
+              properties:
+                file:
+                  type: string
+                  format: byte
+                  description: Base64-encoded file content
+                filename:
+                  type: string
+                  description: Original filename with extension
+                  example: sales_data.csv
+                user_id:
+                  type: string
+                  description: ID of user performing upload
+      responses:
+        '200':
+          description: File synced successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyncResult'
+        '400':
+          description: Invalid request (missing file, unsupported format)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Sync failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyncResult'
+
+  /files:
+    get:
+      summary: List Synced Files
+      description: Get a list of all synced files with their status.
+      operationId: listFiles
+      tags:
+        - Files
+      parameters:
+        - name: source
+          in: query
+          description: Filter by source platform
+          schema:
+            type: string
+            enum: [fabric, snowflake, file_upload, all]
+            default: all
+        - name: status
+          in: query
+          description: Filter by sync status
+          schema:
+            type: string
+            enum: [synced, syncing, failed, pending, all]
+            default: all
+        - name: limit
+          in: query
+          description: Maximum number of results
+          schema:
+            type: integer
+            default: 100
+            maximum: 1000
+      responses:
+        '200':
+          description: List of synced files
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  files:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SyncManifest'
+                  total:
+                    type: integer
+                  filters:
+                    type: object
+                    properties:
+                      source:
+                        type: string
+                      status:
+                        type: string
+
+  /files/{sync_id}/sync-status:
+    get:
+      summary: Get Sync Status
+      description: Get detailed status of a specific sync operation.
+      operationId: getSyncStatus
+      tags:
+        - Files
+      parameters:
+        - name: sync_id
+          in: path
+          required: true
+          description: UUID of the sync operation
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Sync status details
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/SyncManifest'
+                  - type: object
+                    properties:
+                      validation_summary:
+                        type: object
+                      conflicts:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/ConflictLog'
+        '404':
+          description: Sync ID not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /files/{sync_id}:
+    delete:
+      summary: Delete Synced File
+      description: |
+        Delete a synced file from BOTH platforms (cascading delete).
+        This removes:
+        - Data from Snowflake table (by SYNC_ID)
+        - Model definition from Fabric sync directory
+        - Updates manifest status to ROLLBACK
+      operationId: deleteFile
+      tags:
+        - Files
+      parameters:
+        - name: sync_id
+          in: path
+          required: true
+          description: UUID of the sync operation to delete
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: File deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  sync_id:
+                    type: string
+                  success:
+                    type: boolean
+                  actions:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        platform:
+                          type: string
+                        action:
+                          type: string
+                        rows_affected:
+                          type: integer
+        '404':
+          description: Sync ID not found
+
+  /sync/dashboard:
+    get:
+      summary: Dashboard Statistics
+      description: Get aggregated statistics for the sync dashboard.
+      operationId: getDashboard
+      tags:
+        - Sync
+      responses:
+        '200':
+          description: Dashboard data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total_syncs:
+                    type: integer
+                  synced:
+                    type: integer
+                  failed:
+                    type: integer
+                  pending:
+                    type: integer
+                  success_rate:
+                    type: number
+                    format: float
+                  conflicts_detected:
+                    type: integer
+                  checksum_mismatches:
+                    type: integer
+                  retry_queue_size:
+                    type: integer
+                  fabric_connected:
+                    type: boolean
+                  snowflake_connected:
+                    type: boolean
+                  recent_syncs:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SyncManifest'
+
+  /sync/run:
+    post:
+      summary: Trigger Sync
+      description: Trigger a full or directional sync operation.
+      operationId: runSync
+      tags:
+        - Sync
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                direction:
+                  type: string
+                  enum: [bidirectional, fabric_to_snowflake, snowflake_to_fabric]
+                  default: bidirectional
+                full_sync:
+                  type: boolean
+                  description: Force full resync of all tables
+                  default: false
+      responses:
+        '200':
+          description: Sync results
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  direction:
+                    type: string
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SyncResult'
+                  total:
+                    type: integer
+                  succeeded:
+                    type: integer
+                  failed:
+                    type: integer
+
+  /sync/{sync_id}/retry:
+    post:
+      summary: Retry Failed Sync
+      description: Manually retry a failed sync operation.
+      operationId: retrySync
+      tags:
+        - Sync
+      parameters:
+        - name: sync_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Retry result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyncResult'
+
+  /sync/migrate:
+    post:
+      summary: Run Historical Migration
+      description: |
+        Run one-time historical data migration between platforms.
+        Uses idempotency to skip already-migrated tables.
+      operationId: runMigration
+      tags:
+        - Sync
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                direction:
+                  type: string
+                  enum: [bidirectional, fabric_to_snowflake, snowflake_to_fabric]
+                  default: bidirectional
+      responses:
+        '200':
+          description: Migration summary
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  direction:
+                    type: string
+                  started_at:
+                    type: string
+                    format: date-time
+                  completed_at:
+                    type: string
+                    format: date-time
+                  duration_seconds:
+                    type: integer
+                  fabric_to_snowflake:
+                    type: object
+                    properties:
+                      migrated:
+                        type: integer
+                      skipped:
+                        type: integer
+                      failed:
+                        type: integer
+                  snowflake_to_fabric:
+                    type: object
+                    properties:
+                      migrated:
+                        type: integer
+                      skipped:
+                        type: integer
+                      failed:
+                        type: integer
+
+  /fabric/models:
+    get:
+      summary: List Fabric Models
+      description: Get all semantic models from Fabric.
+      operationId: getFabricModels
+      tags:
+        - Platform
+      responses:
+        '200':
+          description: Fabric models
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  models:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        table_name:
+                          type: string
+                        model_name:
+                          type: string
+                        columns:
+                          type: array
+                          items:
+                            type: object
+                  total:
+                    type: integer
+
+  /snowflake/tables:
+    get:
+      summary: List Snowflake Tables
+      description: Get all tables from Snowflake.
+      operationId: getSnowflakeTables
+      tags:
+        - Platform
+      responses:
+        '200':
+          description: Snowflake tables
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  tables:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        table_name:
+                          type: string
+                        columns:
+                          type: array
+                        row_count:
+                          type: integer
+                  total:
+                    type: integer
+
+  /compare:
+    get:
+      summary: Compare Platforms
+      description: Compare data between Fabric and Snowflake.
+      operationId: comparePlatforms
+      tags:
+        - Platform
+      responses:
+        '200':
+          description: Comparison results
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  fabric_count:
+                    type: integer
+                  snowflake_count:
+                    type: integer
+                  in_both:
+                    type: array
+                    items:
+                      type: string
+                  only_in_fabric:
+                    type: array
+                    items:
+                      type: string
+                  only_in_snowflake:
+                    type: array
+                    items:
+                      type: string
+
+  /metrics:
+    get:
+      summary: Prometheus Metrics
+      description: Get metrics in Prometheus format for monitoring.
+      operationId: getMetrics
+      tags:
+        - Monitoring
+      responses:
+        '200':
+          description: Prometheus metrics
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: |
+                  sync_total{status="success"} 150
+                  sync_total{status="failed"} 3
+                  sync_success_rate 98.05
+
+  /audit:
+    get:
+      summary: Get Audit Trail
+      description: Get audit trail entries.
+      operationId: getAuditTrail
+      tags:
+        - Monitoring
+      parameters:
+        - name: sync_id
+          in: query
+          description: Filter by sync ID
+          schema:
+            type: string
+            format: uuid
+        - name: action
+          in: query
+          description: Filter by action type
+          schema:
+            type: string
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 100
+      responses:
+        '200':
+          description: Audit entries
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  entries:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/AuditTrail'
+                  total:
+                    type: integer
+
+components:
+  schemas:
+    SyncResult:
+      type: object
+      properties:
+        sync_id:
+          type: string
+          format: uuid
+        success:
+          type: boolean
+        source_platform:
+          type: string
+        target_platform:
+          type: string
+        table_name:
+          type: string
+        rows_synced:
+          type: integer
+        validation_passed:
+          type: boolean
+        conflicts_detected:
+          type: integer
+        conflicts_resolved:
+          type: integer
+        duration_ms:
+          type: integer
+        error_message:
+          type: string
+          nullable: true
+        fabric_url:
+          type: string
+          nullable: true
+        snowflake_url:
+          type: string
+          nullable: true
+
+    SyncManifest:
+      type: object
+      properties:
+        sync_id:
+          type: string
+          format: uuid
+        source_table:
+          type: string
+        target_table:
+          type: string
+          nullable: true
+        filename:
+          type: string
+          nullable: true
+        source_platform:
+          type: string
+          enum: [fabric, snowflake, file_upload]
+        target_platform:
+          type: string
+          enum: [fabric, snowflake, both]
+        status:
+          type: string
+          enum: [PENDING, SYNCING, SYNCED, FAILED, CONFLICT, ROLLBACK, RETRY_PENDING]
+        created_at:
+          type: string
+          format: date-time
+        created_by:
+          type: string
+        synced_at:
+          type: string
+          format: date-time
+          nullable: true
+        row_count_source:
+          type: integer
+          nullable: true
+        row_count_target:
+          type: integer
+          nullable: true
+        schema_hash:
+          type: string
+          nullable: true
+        data_hash:
+          type: string
+          nullable: true
+        error_message:
+          type: string
+          nullable: true
+        retry_count:
+          type: integer
+
+    ConflictLog:
+      type: object
+      properties:
+        conflict_id:
+          type: string
+          format: uuid
+        sync_id:
+          type: string
+          format: uuid
+        record_id:
+          type: string
+        source_platform:
+          type: string
+        target_platform:
+          type: string
+        source_version:
+          type: object
+        target_version:
+          type: object
+        resolved_record:
+          type: object
+        resolution_method:
+          type: string
+          enum: [LAST_WRITE_WINS, PLATFORM_PRIORITY, MANUAL_REVIEW, SOURCE_WINS]
+        detected_at:
+          type: string
+          format: date-time
+        resolved_at:
+          type: string
+          format: date-time
+          nullable: true
+        resolved_by:
+          type: string
+
+    AuditTrail:
+      type: object
+      properties:
+        audit_id:
+          type: string
+          format: uuid
+        sync_id:
+          type: string
+          format: uuid
+        action:
+          type: string
+        actor:
+          type: string
+        source_platform:
+          type: string
+          nullable: true
+        target_platform:
+          type: string
+          nullable: true
+        affected_table:
+          type: string
+          nullable: true
+        affected_rows:
+          type: integer
+          nullable: true
+        status:
+          type: string
+          enum: [INFO, WARNING, ERROR, CRITICAL]
+        message:
+          type: string
+        latency_ms:
+          type: integer
+          nullable: true
+        timestamp:
+          type: string
+          format: date-time
+
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+        sync_id:
+          type: string
+          format: uuid
+          nullable: true
+
+tags:
+  - name: Status
+    description: Health and status endpoints
+  - name: Files
+    description: File upload and management
+  - name: Sync
+    description: Sync operations
+  - name: Platform
+    description: Platform-specific endpoints
+  - name: Monitoring
+    description: Metrics and audit

@@ -1,0 +1,22 @@
+{
+  "migration_id": "MIG_20260104210606",
+  "name": "data",
+  "created_at": "2026-01-04T21:06:06.173400",
+  "status": "in_progress",
+  "current_phase": "translation",
+  "phases_completed": [
+    "translation"
+  ],
+  "snowflake_views": [
+    "SV_FABRIC_SALESANALYTICS"
+  ],
+  "fabric_models": [],
+  "dax_measures": [],
+  "view_to_table_map": {},
+  "statistics": {
+    "tables_converted": 0,
+    "dax_translated": 0,
+    "files_migrated": 0,
+    "rows_synced": 0
+  }
+}

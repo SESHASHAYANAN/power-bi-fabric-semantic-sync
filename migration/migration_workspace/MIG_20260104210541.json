@@ -1,0 +1,18 @@
+{
+  "migration_id": "MIG_20260104210541",
+  "name": "Users",
+  "created_at": "2026-01-04T21:05:41.024556",
+  "status": "not_started",
+  "current_phase": null,
+  "phases_completed": [],
+  "snowflake_views": [],
+  "fabric_models": [],
+  "dax_measures": [],
+  "view_to_table_map": {},
+  "statistics": {
+    "tables_converted": 0,
+    "dax_translated": 0,
+    "files_migrated": 0,
+    "rows_synced": 0
+  }
+}

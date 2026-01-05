@@ -1,0 +1,130 @@
+{
+  "status": "SUCCESS",
+  "timestamp": "2026-01-05T16:26:28.726938",
+  "sync_mode": "full_refresh",
+  "force": true,
+  "stats": {
+    "start_time": "2026-01-05T16:26:31.481635",
+    "end_time": "2026-01-05T16:27:03.391632",
+    "duration_seconds": 31.909997,
+    "models_processed": 6,
+    "tables_processed": 6,
+    "total_rows_extracted": 91,
+    "total_rows_loaded": 91,
+    "extraction_successes": 5,
+    "extraction_failures": 1,
+    "load_successes": 5,
+    "load_failures": 0
+  },
+  "model_results": [
+    {
+      "model_name": "Sales",
+      "model_id": "cb0ac814-47be-468a-b8ef-4f40b2a813c9",
+      "tables_synced": 1,
+      "tables_failed": 0,
+      "total_rows_extracted": 3,
+      "total_rows_loaded": 3,
+      "table_results": [
+        {
+          "fabric_table": "Sales",
+          "snowflake_table": "TBL_FABRIC_SALES_SALES",
+          "rows_extracted": 3,
+          "rows_loaded": 3,
+          "success": true,
+          "sync_reason": "Force sync requested"
+        }
+      ]
+    },
+    {
+      "model_name": "Table",
+      "model_id": "dfd0f3eb-591c-4751-aa5a-a5a869db33bd",
+      "tables_synced": 1,
+      "tables_failed": 0,
+      "total_rows_extracted": 5,
+      "total_rows_loaded": 5,
+      "table_results": [
+        {
+          "fabric_table": "Table",
+          "snowflake_table": "TBL_FABRIC_TABLE_TABLE",
+          "rows_extracted": 5,
+          "rows_loaded": 5,
+          "success": true,
+          "sync_reason": "Force sync requested"
+        }
+      ]
+    },
+    {
+      "model_name": "day",
+      "model_id": "7574dff4-fa18-4d14-b416-b13aee860907",
+      "tables_synced": 1,
+      "tables_failed": 0,
+      "total_rows_extracted": 31,
+      "total_rows_loaded": 31,
+      "table_results": [
+        {
+          "fabric_table": "day",
+          "snowflake_table": "TBL_FABRIC_DAY_DAY",
+          "rows_extracted": 31,
+          "rows_loaded": 31,
+          "success": true,
+          "sync_reason": "Force sync requested"
+        }
+      ]
+    },
+    {
+      "model_name": "newrep",
+      "model_id": "0e42d9d2-cc68-4b56-a6c8-010390c85cf2",
+      "tables_synced": 0,
+      "tables_failed": 1,
+      "total_rows_extracted": 0,
+      "total_rows_loaded": 0,
+      "table_results": []
+    },
+    {
+      "model_name": "industry",
+      "model_id": "d20c729d-38e3-4422-865a-4fcac602961f",
+      "tables_synced": 1,
+      "tables_failed": 0,
+      "total_rows_extracted": 44,
+      "total_rows_loaded": 44,
+      "table_results": [
+        {
+          "fabric_table": "industry",
+          "snowflake_table": "TBL_FABRIC_INDUSTRY_INDUSTRY",
+          "rows_extracted": 44,
+          "rows_loaded": 44,
+          "success": true,
+          "sync_reason": "Force sync requested"
+        }
+      ]
+    },
+    {
+      "model_name": "continent",
+      "model_id": "0a88cf21-e09c-487c-9d1e-dc643b7c7a0e",
+      "tables_synced": 1,
+      "tables_failed": 0,
+      "total_rows_extracted": 8,
+      "total_rows_loaded": 8,
+      "table_results": [
+        {
+          "fabric_table": "continent",
+          "snowflake_table": "TBL_FABRIC_CONTINENT_CONTINENT",
+          "rows_extracted": 8,
+          "rows_loaded": 8,
+          "success": true,
+          "sync_reason": "Force sync requested"
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "models_processed": 6,
+    "tables_processed": 6,
+    "total_rows_extracted": 91,
+    "total_rows_loaded": 91,
+    "extraction_successes": 5,
+    "extraction_failures": 1,
+    "load_successes": 5,
+    "load_failures": 0
+  }
+}

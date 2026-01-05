@@ -1,6 +1,8 @@
 
 import json
 import logging
+import hashlib
+import os
 from datetime import datetime
 from enum import Enum
 from typing import Any, Dict, List, Optional, Tuple, Set
@@ -431,3 +433,232 @@ class ChangeDetector:
         except Exception as e:
             logger.error(f"Error loading snapshot from {filepath}: {e}")
             return None
+
+    # ================================================================
+    # HASH COMPUTATION FOR SMART CHANGE DETECTION
+    # ================================================================
+    
+    def compute_snapshot_hash(self, snapshot: SchemaSnapshot) -> str:
+        """
+        Compute a hash of a snapshot for quick change detection.
+        
+        The scheduler uses this to determine if a full sync is needed.
+        If the hash matches the last successful sync, we can skip the sync.
+        
+        Args:
+            snapshot: The SchemaSnapshot to hash.
+            
+        Returns:
+            SHA256 hash string of the snapshot content.
+        """
+        # Serialize to JSON (sorted for consistency)
+        json_str = snapshot.to_json()
+        
+        # Compute hash
+        return hashlib.sha256(json_str.encode('utf-8')).hexdigest()
+    
+    def compute_current_hash(self) -> Optional[str]:
+        """
+        Compute the hash of the current Fabric metadata.
+        
+        This is used by the scheduler to check if sync is needed.
+        
+        Returns:
+            Hash string or None if unable to compute.
+        """
+        if not self.fabric_client:
+            logger.warning("Cannot compute current hash: no Fabric client")
+            return None
+            
+        try:
+            # Authenticate and get models
+            if not self.fabric_client.authenticate():
+                logger.error("Failed to authenticate with Fabric")
+                return None
+            
+            models = self.fabric_client.get_semantic_models()
+            if not models:
+                return hashlib.sha256(b"EMPTY").hexdigest()
+            
+            # Create a combined snapshot of all models
+            combined_data = []
+            for model_info in models:
+                model_id = model_info.get("id", "")
+                model_detail = self.fabric_client.get_semantic_model_detail(model_id)
+                if model_detail:
+                    combined_data.append(model_detail)
+            
+            # Serialize and hash
+            json_str = json.dumps(combined_data, sort_keys=True, default=str)
+            return hashlib.sha256(json_str.encode('utf-8')).hexdigest()
+            
+        except Exception as e:
+            logger.error(f"Error computing current hash: {e}")
+            return None
+    
+    # ================================================================
+    # STATE PERSISTENCE FOR CHANGE DETECTION
+    # ================================================================
+    
+    def save_sync_state(self, state_file: str = "sync_state.json") -> bool:
+        """
+        Save the current sync state (last hash, timestamp, etc.)
+        
+        Args:
+            state_file: Path to the state file.
+            
+        Returns:
+            True if saved successfully.
+        """
+        try:
+            current_hash = self.compute_current_hash()
+            
+            state = {
+                "last_sync_hash": current_hash,
+                "last_sync_time": datetime.now().isoformat(),
+                "version": "1.0"
+            }
+            
+            with open(state_file, 'w') as f:
+                json.dump(state, f, indent=2)
+            
+            logger.info(f"Sync state saved to {state_file}")
+            return True
+            
+        except Exception as e:
+            logger.error(f"Error saving sync state: {e}")
+            return False
+    
+    def load_sync_state(self, state_file: str = "sync_state.json") -> Optional[Dict[str, Any]]:
+        """
+        Load the last sync state.
+        
+        Args:
+            state_file: Path to the state file.
+            
+        Returns:
+            State dictionary or None if not found.
+        """
+        try:
+            if not os.path.exists(state_file):
+                return None
+                
+            with open(state_file, 'r') as f:
+                return json.load(f)
+                
+        except Exception as e:
+            logger.error(f"Error loading sync state: {e}")
+            return None
+    
+    def needs_sync(self, state_file: str = "sync_state.json") -> Tuple[bool, str]:
+        """
+        Determine if a sync is needed by comparing current vs last hash.
+        
+        This is the main method used by the scheduler for smart sync detection.
+        
+        Args:
+            state_file: Path to the state file.
+            
+        Returns:
+            Tuple of (needs_sync: bool, reason: str)
+        """
+        # Load last state
+        last_state = self.load_sync_state(state_file)
+        
+        if not last_state:
+            return True, "No previous sync state found - initial sync needed"
+        
+        last_hash = last_state.get("last_sync_hash")
+        if not last_hash:
+            return True, "No previous hash found - sync needed"
+        
+        # Compute current hash
+        current_hash = self.compute_current_hash()
+        
+        if not current_hash:
+            return True, "Could not compute current hash - sync needed for safety"
+        
+        # Compare
+        if current_hash != last_hash:
+            return True, f"Metadata changed (hash mismatch) - sync needed"
+        
+        last_sync_time = last_state.get("last_sync_time", "unknown")
+        return False, f"No changes detected since {last_sync_time}"
+    
+    def mark_sync_complete(self, state_file: str = "sync_state.json") -> bool:
+        """
+        Mark the current state as successfully synced.
+        
+        Called after a successful sync to update the state file.
+        
+        Args:
+            state_file: Path to the state file.
+            
+        Returns:
+            True if saved successfully.
+        """
+        return self.save_sync_state(state_file)
+
+
+# ================================================================
+# SMART CHANGE DETECTOR WRAPPER FOR SCHEDULER
+# ================================================================
+
+class SmartChangeDetector:
+    """
+    Wrapper class that provides a simple interface for the scheduler.
+    
+    This class is used by the SyncScheduler to determine if a sync is needed.
+    """
+    
+    def __init__(
+        self, 
+        fabric_client=None, 
+        snowflake_connector=None,
+        state_file: str = "sync_state.json"
+    ):
+        """
+        Initialize the smart change detector.
+        
+        Args:
+            fabric_client: FabricApiClient instance.
+            snowflake_connector: SnowflakeConnector instance.
+            state_file: Path to store sync state.
+        """
+        self.detector = ChangeDetector(fabric_client, snowflake_connector)
+        self.state_file = state_file
+        self._last_hash: Optional[str] = None
+        
+        # Load existing state
+        state = self.detector.load_sync_state(state_file)
+        if state:
+            self._last_hash = state.get("last_sync_hash")
+    
+    def compute_current_hash(self) -> Optional[str]:
+        """
+        Compute the current metadata hash.
+        
+        Used by the scheduler to check for changes.
+        """
+        return self.detector.compute_current_hash()
+    
+    def check_for_changes(self) -> Tuple[bool, str]:
+        """
+        Check if there are changes that require sync.
+        
+        Returns:
+            Tuple of (has_changes, reason)
+        """
+        return self.detector.needs_sync(self.state_file)
+    
+    def mark_sync_complete(self) -> bool:
+        """Mark the current state as synced."""
+        result = self.detector.mark_sync_complete(self.state_file)
+        if result:
+            self._last_hash = self.detector.compute_current_hash()
+        return result
+    
+    @property
+    def last_sync_hash(self) -> Optional[str]:
+        """Get the hash from the last successful sync."""
+        return self._last_hash

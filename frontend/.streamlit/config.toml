@@ -5,3 +5,12 @@ enableCORS = false
 
 [browser]
 gatherUsageStats = false
+
+[theme]
+# Lock down the color palette - force dark theme
+primaryColor = "#667eea"
+backgroundColor = "#0f0f23"
+secondaryBackgroundColor = "#1a1a2e"
+textColor = "#f1f5f9"
+font = "sans serif"
+base = "dark"

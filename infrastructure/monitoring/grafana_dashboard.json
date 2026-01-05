@@ -1,0 +1,567 @@
+{
+    "annotations": {
+        "list": []
+    },
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 0,
+    "id": null,
+    "links": [],
+    "liveNow": false,
+    "panels": [
+        {
+            "gridPos": {
+                "h": 3,
+                "w": 24,
+                "x": 0,
+                "y": 0
+            },
+            "id": 1,
+            "options": {
+                "content": "# Fabric ↔ Snowflake Sync Dashboard\n\nReal-time monitoring of bidirectional data synchronization",
+                "mode": "markdown"
+            },
+            "title": "",
+            "type": "text"
+        },
+        {
+            "gridPos": {
+                "h": 4,
+                "w": 4,
+                "x": 0,
+                "y": 3
+            },
+            "id": 2,
+            "options": {
+                "colorMode": "value",
+                "graphMode": "none",
+                "justifyMode": "center",
+                "orientation": "auto",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "",
+                    "values": false
+                },
+                "textMode": "value_and_name"
+            },
+            "targets": [
+                {
+                    "expr": "sync_total",
+                    "legendFormat": "Total Syncs"
+                }
+            ],
+            "title": "Total Syncs",
+            "type": "stat"
+        },
+        {
+            "gridPos": {
+                "h": 4,
+                "w": 4,
+                "x": 4,
+                "y": 3
+            },
+            "id": 3,
+            "options": {
+                "colorMode": "value",
+                "graphMode": "none",
+                "justifyMode": "center",
+                "orientation": "auto",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "",
+                    "values": false
+                },
+                "textMode": "value_and_name",
+                "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                        {
+                            "color": "red",
+                            "value": null
+                        },
+                        {
+                            "color": "yellow",
+                            "value": 95
+                        },
+                        {
+                            "color": "green",
+                            "value": 99
+                        }
+                    ]
+                }
+            },
+            "targets": [
+                {
+                    "expr": "sync_success_rate",
+                    "legendFormat": "Success Rate %"
+                }
+            ],
+            "title": "Success Rate",
+            "type": "stat"
+        },
+        {
+            "gridPos": {
+                "h": 4,
+                "w": 4,
+                "x": 8,
+                "y": 3
+            },
+            "id": 4,
+            "options": {
+                "colorMode": "value",
+                "graphMode": "none",
+                "justifyMode": "center",
+                "orientation": "auto",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "",
+                    "values": false
+                },
+                "textMode": "value_and_name",
+                "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                        {
+                            "color": "green",
+                            "value": null
+                        },
+                        {
+                            "color": "yellow",
+                            "value": 10
+                        },
+                        {
+                            "color": "red",
+                            "value": 50
+                        }
+                    ]
+                }
+            },
+            "targets": [
+                {
+                    "expr": "sync_retry_queue_size",
+                    "legendFormat": "Retry Queue"
+                }
+            ],
+            "title": "Retry Queue",
+            "type": "stat"
+        },
+        {
+            "gridPos": {
+                "h": 4,
+                "w": 4,
+                "x": 12,
+                "y": 3
+            },
+            "id": 5,
+            "options": {
+                "colorMode": "value",
+                "graphMode": "none",
+                "justifyMode": "center",
+                "orientation": "auto",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "",
+                    "values": false
+                },
+                "textMode": "value_and_name",
+                "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                        {
+                            "color": "green",
+                            "value": null
+                        },
+                        {
+                            "color": "red",
+                            "value": 1
+                        }
+                    ]
+                }
+            },
+            "targets": [
+                {
+                    "expr": "sync_checksum_mismatches_total",
+                    "legendFormat": "Checksum Mismatches"
+                }
+            ],
+            "title": "Integrity Issues",
+            "type": "stat"
+        },
+        {
+            "gridPos": {
+                "h": 4,
+                "w": 4,
+                "x": 16,
+                "y": 3
+            },
+            "id": 6,
+            "options": {
+                "colorMode": "value",
+                "graphMode": "none",
+                "justifyMode": "center",
+                "orientation": "auto",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "",
+                    "values": false
+                },
+                "textMode": "value_and_name"
+            },
+            "targets": [
+                {
+                    "expr": "sync_conflicts_detected_total",
+                    "legendFormat": "Conflicts"
+                }
+            ],
+            "title": "Conflicts Detected",
+            "type": "stat"
+        },
+        {
+            "gridPos": {
+                "h": 4,
+                "w": 4,
+                "x": 20,
+                "y": 3
+            },
+            "id": 7,
+            "fieldConfig": {
+                "defaults": {
+                    "unit": "ms"
+                }
+            },
+            "options": {
+                "colorMode": "value",
+                "graphMode": "none",
+                "justifyMode": "center",
+                "orientation": "auto",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "",
+                    "values": false
+                },
+                "textMode": "value_and_name",
+                "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                        {
+                            "color": "green",
+                            "value": null
+                        },
+                        {
+                            "color": "yellow",
+                            "value": 180000
+                        },
+                        {
+                            "color": "red",
+                            "value": 300000
+                        }
+                    ]
+                }
+            },
+            "targets": [
+                {
+                    "expr": "histogram_quantile(0.95, rate(sync_duration_seconds_bucket[5m])) * 1000",
+                    "legendFormat": "p95 Latency"
+                }
+            ],
+            "title": "Sync Latency (p95)",
+            "type": "stat"
+        },
+        {
+            "gridPos": {
+                "h": 8,
+                "w": 12,
+                "x": 0,
+                "y": 7
+            },
+            "id": 8,
+            "options": {
+                "legend": {
+                    "calcs": [],
+                    "displayMode": "list",
+                    "placement": "bottom",
+                    "showLegend": true
+                }
+            },
+            "targets": [
+                {
+                    "expr": "rate(sync_total{status=\"success\"}[5m])",
+                    "legendFormat": "Success"
+                },
+                {
+                    "expr": "rate(sync_total{status=\"failed\"}[5m])",
+                    "legendFormat": "Failed"
+                }
+            ],
+            "title": "Sync Operations Rate",
+            "type": "timeseries"
+        },
+        {
+            "gridPos": {
+                "h": 8,
+                "w": 12,
+                "x": 12,
+                "y": 7
+            },
+            "id": 9,
+            "options": {
+                "legend": {
+                    "calcs": [],
+                    "displayMode": "list",
+                    "placement": "bottom",
+                    "showLegend": true
+                }
+            },
+            "targets": [
+                {
+                    "expr": "histogram_quantile(0.50, rate(sync_duration_seconds_bucket[5m]))",
+                    "legendFormat": "p50"
+                },
+                {
+                    "expr": "histogram_quantile(0.95, rate(sync_duration_seconds_bucket[5m]))",
+                    "legendFormat": "p95"
+                },
+                {
+                    "expr": "histogram_quantile(0.99, rate(sync_duration_seconds_bucket[5m]))",
+                    "legendFormat": "p99"
+                }
+            ],
+            "title": "Sync Latency Distribution",
+            "type": "timeseries"
+        },
+        {
+            "gridPos": {
+                "h": 8,
+                "w": 8,
+                "x": 0,
+                "y": 15
+            },
+            "id": 10,
+            "options": {
+                "legend": {
+                    "calcs": [],
+                    "displayMode": "list",
+                    "placement": "right",
+                    "showLegend": true
+                },
+                "pieType": "pie"
+            },
+            "targets": [
+                {
+                    "expr": "sync_total{status=\"success\"}",
+                    "legendFormat": "Synced"
+                },
+                {
+                    "expr": "sync_total{status=\"failed\"}",
+                    "legendFormat": "Failed"
+                },
+                {
+                    "expr": "sync_total{status=\"pending\"}",
+                    "legendFormat": "Pending"
+                }
+            ],
+            "title": "Sync Status Distribution",
+            "type": "piechart"
+        },
+        {
+            "gridPos": {
+                "h": 8,
+                "w": 8,
+                "x": 8,
+                "y": 15
+            },
+            "id": 11,
+            "options": {
+                "legend": {
+                    "calcs": [],
+                    "displayMode": "list",
+                    "placement": "bottom",
+                    "showLegend": true
+                }
+            },
+            "targets": [
+                {
+                    "expr": "rate(fabric_to_snowflake_sync_total[5m])",
+                    "legendFormat": "Fabric → Snowflake"
+                },
+                {
+                    "expr": "rate(snowflake_to_fabric_sync_total[5m])",
+                    "legendFormat": "Snowflake → Fabric"
+                },
+                {
+                    "expr": "rate(file_upload_sync_total[5m])",
+                    "legendFormat": "File Upload"
+                }
+            ],
+            "title": "Sync by Direction",
+            "type": "timeseries"
+        },
+        {
+            "gridPos": {
+                "h": 8,
+                "w": 8,
+                "x": 16,
+                "y": 15
+            },
+            "id": 12,
+            "options": {
+                "legend": {
+                    "calcs": [],
+                    "displayMode": "list",
+                    "placement": "bottom",
+                    "showLegend": true
+                }
+            },
+            "targets": [
+                {
+                    "expr": "sync_retry_queue_size",
+                    "legendFormat": "Queue Size"
+                },
+                {
+                    "expr": "sync_conflicts_pending_review",
+                    "legendFormat": "Pending Conflicts"
+                }
+            ],
+            "title": "Pending Items",
+            "type": "timeseries"
+        },
+        {
+            "gridPos": {
+                "h": 10,
+                "w": 24,
+                "x": 0,
+                "y": 23
+            },
+            "id": 13,
+            "options": {
+                "footer": {
+                    "fields": "",
+                    "reducer": [
+                        "sum"
+                    ],
+                    "show": false
+                },
+                "showHeader": true
+            },
+            "targets": [
+                {
+                    "expr": "topk(10, sync_table_operations_total)",
+                    "format": "table",
+                    "instant": true
+                }
+            ],
+            "title": "Top 10 Tables by Sync Operations",
+            "transformations": [
+                {
+                    "id": "organize",
+                    "options": {
+                        "excludeByName": {
+                            "Time": true
+                        }
+                    }
+                }
+            ],
+            "type": "table"
+        },
+        {
+            "gridPos": {
+                "h": 8,
+                "w": 12,
+                "x": 0,
+                "y": 33
+            },
+            "id": 14,
+            "options": {
+                "legend": {
+                    "calcs": [],
+                    "displayMode": "list",
+                    "placement": "bottom",
+                    "showLegend": true
+                }
+            },
+            "targets": [
+                {
+                    "expr": "rate(sync_validation_row_count_checks_total[5m])",
+                    "legendFormat": "Row Count"
+                },
+                {
+                    "expr": "rate(sync_validation_checksum_checks_total[5m])",
+                    "legendFormat": "Checksum"
+                },
+                {
+                    "expr": "rate(sync_validation_schema_checks_total[5m])",
+                    "legendFormat": "Schema"
+                }
+            ],
+            "title": "Validation Checks Rate",
+            "type": "timeseries"
+        },
+        {
+            "gridPos": {
+                "h": 8,
+                "w": 12,
+                "x": 12,
+                "y": 33
+            },
+            "id": 15,
+            "options": {
+                "legend": {
+                    "calcs": [],
+                    "displayMode": "list",
+                    "placement": "bottom",
+                    "showLegend": true
+                }
+            },
+            "targets": [
+                {
+                    "expr": "rate(sync_retry_attempts_total{result=\"success\"}[5m])",
+                    "legendFormat": "Retry Success"
+                },
+                {
+                    "expr": "rate(sync_retry_attempts_total{result=\"failed\"}[5m])",
+                    "legendFormat": "Retry Failed"
+                },
+                {
+                    "expr": "rate(sync_retry_attempts_total{result=\"exhausted\"}[5m])",
+                    "legendFormat": "Max Retries Exhausted"
+                }
+            ],
+            "title": "Retry Outcomes",
+            "type": "timeseries"
+        }
+    ],
+    "refresh": "30s",
+    "schemaVersion": 38,
+    "style": "dark",
+    "tags": [
+        "sync",
+        "fabric",
+        "snowflake",
+        "data-platform"
+    ],
+    "templating": {
+        "list": []
+    },
+    "time": {
+        "from": "now-6h",
+        "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "",
+    "title": "Fabric-Snowflake Sync Dashboard",
+    "uid": "sync-dashboard-v1",
+    "version": 1,
+    "weekStart": ""
+}
